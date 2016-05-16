@@ -89,7 +89,7 @@ my $java_main = '';
 if($lang eq 'cpp'){
 	WriteFile "$EXEC_DIR/program.cpp", $$run{'source_code'};
 
-	System "su spoj0run -c \"g++ -O2 $EXEC_DIR/program.cpp -o $EXEC_DIR/program\" ";
+	System "su spoj0run -c \"g++ -O2 $EXEC_DIR/program.cpp -std=c++11 -o $EXEC_DIR/program\" ";
 	$status = 'ce' if(not -f "$EXEC_DIR/program");
 
 }
