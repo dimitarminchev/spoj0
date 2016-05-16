@@ -120,22 +120,26 @@ sub PrintBoard{
 	my @rows = (th(['Rank', 'Name', 'Solved', 'Time']).$prob_head.th('Attempts'),);
 	
 	my $rank = 0;
+	
+	# Colors
 	foreach my $user_id(@user_order){
-		++$rank;
-		my $row = "";
-		$row .= td($rank)
-			
-.td($user_stat{$user_id}{'name'}." (".$user_id.")")
-			.td($user_stat{$user_id}{'problems'})
-			.td(int($user_stat{$user_id}{'time'}));
-		foreach my $problem_id(@problem_order){
-			$row .= td(int($user_stat{$user_id}{$problem_id}{'first_ok'}).
-				" (".$user_stat{$user_id}{$problem_id}{'bad'}.")");
-			
-		}
-		$row .= td($user_stat{$user_id}{'submits'});
-		push @rows, $row;
-	}
+                ++$rank;
+                my $row = "";
+                $row .= td($rank)
+                        .td($user_stat{$user_id}{'name'})
+                        .td($user_stat{$user_id}{'problems'})
+                        .td(int($user_stat{$user_id}{'time'}));
+                foreach my $problem_id(@problem_order){
+                        my $fok = defined($user_stat{$user_id}{$problem_id}{'first_ok'}) ? int($user_stat{$user_id}{$problem_id}{'first_ok'}) : "-";
+                        my $bgc = '#CCCCCC';
+                        $bgc = '#FFAAAA' if($user_stat{$user_id}{$problem_id}{'bad'} > 0);
+                        $bgc = '#AAFFAA' if(defined($user_stat{$user_id}{$problem_id}{'first_ok'}));
+                        $row .= td({-bgcolor=>$bgc}, $fok." (".$user_stat{$user_id}{$problem_id}{'bad'}.")");
+
+                }
+                $row .= td($user_stat{$user_id}{'submits'});
+                push @rows, $row;
+        }
 	
 	#TODO: add totals row!
 	
