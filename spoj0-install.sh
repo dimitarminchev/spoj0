@@ -1,54 +1,59 @@
 #!/bin/bash -verbose
-SPOJ0_SVN_URL=http://spoj0.googlecode.com/svn/trunk/
 
+# SPOJ git repository
+SPOJ0_GIT_URL=https://github.com/dimitarminchev/spoj0.git
+
+# Pause
 pause() {
-	echo "If everything is ok, press enter, otherwise cancel it with ctlr+c..."
-	#read
+	echo "Press ENTER to continue or use CTRL+C to stop..."
+	read
 }
 
-#attempts to perform full install from svn.
-#Should be run as root!
-#there is no uninstaller so read it before running!
+# Attempts to perform full install from svn.
+# Should be run as root!
+# There is no uninstaller so read it before running!
 
-apt-get install launchtool timeout libapache2-mod-perl2 apache2 mysql-server mysql-client subversion
+# Install packages
+apt-get install launchtool
+apt-get install coreutils # apt-get install timeout
+apt-get install libapache2-mod-perl2
+apt-get install apache2
+apt-get install mysql-server
+apt-get install mysql-client
+apt-get install subversion
 
-echo "Please fill in the information about the spoj0 user (as you like)"
+# Create users
+echo "User spoj0..."
 adduser spoj0
-echo "Please fill in the information about the spoj0-exec user (as you like)"
+echo "User spoj0run..."
 adduser spoj0run
-
 pause
 
+# Working dir
 cd /home/spoj0
-
-echo "stopping if old deamon is running"
+echo "Stopping if old deamon is running"
 ./spoj0-control.pl stop
-
-echo "note that this creates working svn version of the system, so you can submit changes back"
-svn checkout $SPOJ0_SVN_URL .
-#mkdir public_html
-#ln -s /home/spoj0/web public_html
-
+echo "Note that this creates working git version of the system, so you can submit changes back"
+git clone $SPOJ0_GIT_URL
+# mkdir public_html
+# ln -s /home/spoj0/web public_html
 pause
 
+# Owner and Permissions
 chown -R spoj0:spoj0 .
 chmod 755 *.pl
 chmod 755 *.sh
-
 cd /home/spoj0/web
 chmod 755 *.pl
-
 cd /home/spoj0
 pause
 
+# MySQL
 echo "Please enter the adminitstrative password for mysql."
 mysql -p < spoj0.sql
-
 pause
 
 cd /home/spoj0
-
-
 
 
 echo "Trying to add site to apache..."
