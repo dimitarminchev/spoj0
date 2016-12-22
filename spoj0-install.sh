@@ -23,14 +23,14 @@ chmod 755 *.pl
 chmod 755 *.sh
 
 # MySQL
-echo "Enter mysql password:" mysql -p < spoj0.sql
+echo "Enter mysql password:"
+mysql -p < spoj0.sql
 
 # Apache
 cat <<EOT > /etc/apache2/sites-available/spoj0.conf
 Alias /spoj /home/spoj0/web2
 <Directory /home/spoj0/web2>
-Options MultiViews Indexes
-Includes FollowSymLinks ExecCGI
+Options MultiViews Indexes Includes FollowSymLinks ExecCGI
 AllowOverride All
 Require all granted
 allow from all
