@@ -2,7 +2,10 @@
 # Note: This Script should be run as root!
 
 # INSTALL PACKAGES
-apt-get install launchtool libapache2-mod-perl2 apache2 mysql-server mysql-client libdbi-perl libdbd-mysql-perl default-jdk g++
+apt-get update
+apt-get install launchtool libapache2-mod-perl2 apache2 mysql-server mysql-client libdbi-perl libdbd-mysql-perl default-jdk g++ --fix-missing
+echo "Enter to continue..."
+read
 
 # CREATE USERS
 useradd --create-home --password spoj0 spoj0
