@@ -24,8 +24,8 @@ $STATUS_RE = 're'; // runtime error
 /* MySQL */
 // Creditentials
 $servername = "localhost";
-$username = "spoj0";
-$password = "spoj0";
+$username = "spoj0_admin";
+$password = "stancho3";
 $dbname = "spoj0";
 
 // Create connection
