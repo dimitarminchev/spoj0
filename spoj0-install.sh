@@ -41,14 +41,17 @@ service apache2 reload
 ./spoj0-control.pl import-set trivial
 
 # 1 = hello, 2 = a+b
-./spoj0-control.pl submit 1 5 ./test/hello_ok.java java hello_ok.java
-./spoj0-control.pl submit 1 5 ./test/hello_pe.java java hello_pe.java
-./spoj0-control.pl submit 1 5 ./test/hello_re.java java hello_re.java
-./spoj0-control.pl submit 1 5 ./test/hello_tl.java java hello_tl.java
-./spoj0-control.pl submit 1 5 ./test/hello_wa.java java hello_wa.java
-./spoj0-control.pl submit 2 5 ./test/ab_ok.java java ab_ok.java
-./spoj0-control.pl submit 1 5 ./test/hello_ok.cpp cpp hello_ok.cpp
-./spoj0-control.pl submit 1 5 ./test/hello_pe.cpp cpp hello_pe.cpp
-./spoj0-control.pl submit 2 5 ./test/ab_ok.cpp cpp ab_ok.cpp
-./spoj0-control.pl submit 2 5 ./test/ab_pe.cpp cpp ab_pe.cpp
-./spoj0-control.pl submit 2 5 ./test/ab_wa.cpp cpp ab_wa.cpp
+./spoj0-control.pl submit 1 2 ./test/hello_ok.java java hello_ok.java
+./spoj0-control.pl submit 1 2 ./test/hello_pe.java java hello_pe.java
+./spoj0-control.pl submit 1 2 ./test/hello_re.java java hello_re.java
+./spoj0-control.pl submit 1 2 ./test/hello_tl.java java hello_tl.java
+./spoj0-control.pl submit 1 2 ./test/hello_wa.java java hello_wa.java
+./spoj0-control.pl submit 2 2 ./test/ab_ok.java java ab_ok.java
+./spoj0-control.pl submit 1 2 ./test/hello_ok.cpp cpp hello_ok.cpp
+./spoj0-control.pl submit 1 2 ./test/hello_pe.cpp cpp hello_pe.cpp
+./spoj0-control.pl submit 2 2 ./test/ab_ok.cpp cpp ab_ok.cpp
+./spoj0-control.pl submit 2 2 ./test/ab_pe.cpp cpp ab_pe.cpp
+./spoj0-control.pl submit 2 2 ./test/ab_wa.cpp cpp ab_wa.cpp
+
+# DONE
+echo "ENJOY SPOJ!"
