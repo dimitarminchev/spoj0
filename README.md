@@ -13,6 +13,11 @@ cd spoj0
 sudo ./spoj0-install.sh
 ```
 
+## Compilers
+- g++ 6.2.0 20161005
+- javac 1.8.0_111
+- Mono C# compiler version 4.2.1.0
+
 ## Web interface
 - Original web interface is written on PERL by Milo Sredkov and it is available for preview online at the [dev.bfu.bg][2]. 
 - Brand new web interface is written on PHP by Dimitar Minchev and it is available for preview online at the [atp.bfu.bg][3].
