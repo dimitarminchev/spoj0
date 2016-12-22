@@ -118,8 +118,8 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 <div class="col-md-4">
 <div class="g-recaptcha" data-sitekey="6LeZxQsUAAAAANhwzMKG7AOa1oT0q7LOOd58eWoa"></div>
 </div>
--->
 </div>
+-->
 <!-- Submit Button -->
 <div class="form-group">
   <label class="col-md-4 control-label" for="submit"></label>
@@ -133,14 +133,14 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 
 
 
-<?php 
+<?php
 }
-// END GET 
+// END GET
 ?>
 
 
 
-</div> 
+</div>
 <!-- /Основно съдържание -->
 
 <!-- Заключителна част -->

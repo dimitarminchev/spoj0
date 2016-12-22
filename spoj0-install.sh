@@ -38,22 +38,23 @@ EOT
 a2ensite spoj0.conf
 service apache2 reload
 
-# START AND IMPORT SETS
+# RUN AND IMPORT TEST SET
 ./spoj0-control.pl start
 ./spoj0-control.pl import-set test
 
-# 1 = hello, 2 = a+b
-./spoj0-control.pl submit 1 2 ./test/hello_ok.java java hello_ok.java
-./spoj0-control.pl submit 1 2 ./test/hello_pe.java java hello_pe.java
-./spoj0-control.pl submit 1 2 ./test/hello_re.java java hello_re.java
-./spoj0-control.pl submit 1 2 ./test/hello_tl.java java hello_tl.java
-./spoj0-control.pl submit 1 2 ./test/hello_wa.java java hello_wa.java
-./spoj0-control.pl submit 2 2 ./test/ab_ok.java java ab_ok.java
-./spoj0-control.pl submit 1 2 ./test/hello_ok.cpp cpp hello_ok.cpp
-./spoj0-control.pl submit 1 2 ./test/hello_pe.cpp cpp hello_pe.cpp
-./spoj0-control.pl submit 2 2 ./test/ab_ok.cpp cpp ab_ok.cpp
-./spoj0-control.pl submit 2 2 ./test/ab_pe.cpp cpp ab_pe.cpp
-./spoj0-control.pl submit 2 2 ./test/ab_wa.cpp cpp ab_wa.cpp
+# SAMPLE SUBMITS
+./spoj0-control.pl submit 1 2 ./sets/test/samples/hello_ok.java java hello_ok.java
+./spoj0-control.pl submit 1 2 ./sets/test/samples/hello_pe.java java hello_pe.java
+./spoj0-control.pl submit 1 2 ./sets/test/samples/hello_re.java java hello_re.java
+./spoj0-control.pl submit 1 2 ./sets/test/samples/hello_tl.java java hello_tl.java
+./spoj0-control.pl submit 1 2 ./sets/test/samples/hello_wa.java java hello_wa.java
+./spoj0-control.pl submit 2 2 ./sets/test/samples/ab_ok.java java ab_ok.java
+./spoj0-control.pl submit 1 2 ./sets/test/samples/hello_ok.cpp cpp hello_ok.cpp
+./spoj0-control.pl submit 1 2 ./sets/test/samples/hello_pe.cpp cpp hello_pe.cpp
+./spoj0-control.pl submit 2 2 ./sets/test/samples/ab_ok.cpp cpp ab_ok.cpp
+./spoj0-control.pl submit 2 2 ./sets/test/samples/ab_pe.cpp cpp ab_pe.cpp
+./spoj0-control.pl submit 2 2 ./sets/test/samples/ab_wa.cpp cpp ab_wa.cpp
+./spoj0-control.pl submit 1 2 ./sets/test/samples/hello_ok.cs cs hello_ok.cs
 
 # DONE
 echo "ENJOY SPOJ!"
