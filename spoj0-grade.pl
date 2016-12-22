@@ -89,7 +89,8 @@ my $java_main = '';
 if($lang eq 'cpp'){
 	WriteFile "$EXEC_DIR/program.cpp", $$run{'source_code'};
 
-	System "su spoj0run -c \"g++ -O2 $EXEC_DIR/program.cpp -std=c++11 -o $EXEC_DIR/program\" ";
+	#System "su spoj0run -c \"g++ -O2 $EXEC_DIR/program.cpp -std=c++11 -o $EXEC_DIR/program\" ";
+        System "g++ -O2 $EXEC_DIR/program.cpp -std=c++11 -o $EXEC_DIR/program";
 	$status = 'ce' if(not -f "$EXEC_DIR/program");
 
 }
@@ -170,9 +171,12 @@ sub Run{
 			#killed - timeout
 			$status = 'tl1';
 		}
-		elsif($exit != 0 || -s "$EXEC_DIR/run.err"){
-			$status = 're';
-		}
+		#elsif($exit != 0 || -s "$EXEC_DIR/run.err"){
+		#	$status = 're';
+		#}
+		elsif($exit != 0){
+                       $status = 're';
+                }
 		
 		System "cat $EXEC_DIR/time.out";
 		if($status eq 'tl1' || $status eq 'ok'){
