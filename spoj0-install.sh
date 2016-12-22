@@ -1,11 +1,9 @@
-#!/bin/bash
+#!/bin/bash -verbose
 # Note: This Script should be run as root!
 
 # INSTALL PACKAGES
 apt-get update
 apt-get install launchtool libapache2-mod-perl2 apache2 mysql-server mysql-client libdbi-perl libdbd-mysql-perl default-jdk g++ --fix-missing
-echo "Enter to continue..."
-read
 
 # CREATE USERS
 useradd --create-home --password spoj0 spoj0
@@ -24,6 +22,7 @@ chmod 755 *.pl
 chmod 755 *.sh
 
 # MYSQL
+echo -n "MYSQL: "
 mysql -p < spoj0.sql
 
 # APACHE
