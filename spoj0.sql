@@ -64,23 +64,14 @@ CREATE TABLE `users` (
   PRIMARY KEY  (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='User accounts (may be teams also)';
 
--- users 1..9 are test users
-
 --
 -- Dumping data for table `users`
 --
 
 LOCK TABLES `users` WRITE;
-INSERT INTO `users` VALUES (1,'test1',MD5('change-me'),'Test 1','test user', 1);
-INSERT INTO `users` VALUES (2,'test2',MD5('p2-guess'),'Test 2','test user', 0);
-INSERT INTO `users` VALUES (3,'test3',MD5('p3-guess'),'Test 3','test user', 0);
-INSERT INTO `users` VALUES (4,'test4',MD5('p4-guess'),'Test 4','test user', 0);
-INSERT INTO `users` VALUES (5,'test5',MD5('p5-guess'),'Test 5','test user', 0);
-INSERT INTO `users` VALUES (6,'test6',MD5('p6-guess'),'Test 6','test user', 0);
-INSERT INTO `users` VALUES (7,'test7',MD5('p7-guess'),'Test 7','test user', 0);
-INSERT INTO `users` VALUES (8,'test8',MD5('p8-guess'),'Test 8','test user', 0);
-INSERT INTO `users` VALUES (9,'test9',MD5('p9-guess'),'Test 9','test user', 0);
-INSERT INTO `users` VALUES (10,'milo','83e4a96aed96436c621b9809e258b309','Milo Sredkov','coach', 0);
+INSERT INTO `users` VALUES (1,'milo','83e4a96aed96436c621b9809e258b309','Milo Sredkov','developer', 0);
+INSERT INTO `users` VALUES (2,'mitko','d880e4a4b8a80eb33c1c40604930b79c','Dimitar Minchev','developer', 0);
+INSERT INTO `users` VALUES (3,'test',MD5('test'),'test','test user', 0);
 UNLOCK TABLES;
 
 
@@ -111,11 +102,9 @@ CREATE TABLE `runs` (
 -- Dumping data for table `runs`
 --
 
-
 --
 -- Table structure for table `runs`
 --
-
 DROP TABLE IF EXISTS `news`;
 CREATE TABLE `news` (
   `new_id` int(11) NOT NULL auto_increment,
