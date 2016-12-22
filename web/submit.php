@@ -117,7 +117,7 @@ if(isset($_REQUEST["id"])) $pid = (int)$_REQUEST["id"];
   <div class="col-md-4">
    <select class="form-control" name="language" id="language" class="form-control input-md" >
     <option selected value="cpp">C++</option>
-<!-- <option value="csharp">C#</option> -->
+    <option value="cs">C#</option>
     <option value="java">Java</option>
    </select>
   </div>
