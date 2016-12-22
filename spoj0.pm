@@ -64,25 +64,22 @@ our $STATUS_RE = 're'; #runtime error
 our $TESTER_ID = 1; #the identifier of the hidden test user from which solutions may be probed
 
 our %LANGUAGES = (
-	'cpp' => "Gnu C++ (Default Version)",
-	'java' => "Java (Default Version)",
+	'cpp' => "C++",
+	'java' => "Java",
+	'cs' => "C#",
 );
 
 our %DEFAULT_SOURCE_FILE = (
 	'cpp' => "program.cpp",
 	'java' => "program.java",
+	'cs' => "program.cs",
 );
 
 our $DEFAULT_LANG = 'cpp';
 
 our @TITLES = (
-	"Споджо",
-	"Спри да Пипаш Онлайн Джъджа 0",
-	"Stancho and Pancho Online Jazz Oh",
-	"Sofia Public Onlune Judge Zero",
-	"Stand Proud Online Judge Zero",
-	"Student Panic Online Judge 0",
-	"Stop Playing Other Junk 0utside",
+	"SPOJ",
+	"Simple Programming Contests Online Judge System",
 );
 
 sub ParseConf{

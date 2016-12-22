@@ -89,17 +89,21 @@ my $java_main = '';
 if($lang eq 'cpp'){
 	WriteFile "$EXEC_DIR/program.cpp", $$run{'source_code'};
 
-	#System "su spoj0run -c \"g++ -O2 $EXEC_DIR/program.cpp -std=c++11 -o $EXEC_DIR/program\" ";
-        System "g++ -O2 $EXEC_DIR/program.cpp -std=c++11 -o $EXEC_DIR/program";
+	System "su spoj0run -c \"g++ -O2 $EXEC_DIR/program.cpp -std=c++11 -o $EXEC_DIR/program\" ";
+        #System "g++ -O2 $EXEC_DIR/program.cpp -std=c++11 -o $EXEC_DIR/program";
 	$status = 'ce' if(not -f "$EXEC_DIR/program");
 
 }
 elsif($lang eq 'java'){
 	$java_main = JavaMain;
 	WriteFile "$EXEC_DIR/$java_main.java", $$run{'source_code'};
-
 	System "su spoj0run -c \"javac $EXEC_DIR/$java_main.java\" ";
 	$status = 'ce' if(not -f "$EXEC_DIR/$java_main.class");
+}
+elsif($lang eq 'cs'){
+	WriteFile "$EXEC_DIR/program.cs", $$run{'source_code'};
+        System "su spoj0run -c \"mcs -out:$EXEC_DIR/program.exe  $EXEC_DIR/program.cs\"";
+        $status = 'ce' if(not -f "$EXEC_DIR/program.exe");
 }
 else{
 	die "Unsupported language $lang!";
@@ -154,6 +158,9 @@ sub Run{
 		}
 		elsif($lang eq 'java'){
 			$exec = "java -cp . $java_main";
+		}
+		elsif($lang eq 'cs') {
+			$exec = "mono $EXEC_DIR/program.exe";
 		}
 		else{
 			die "Unsupported language $lang!";

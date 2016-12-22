@@ -24,10 +24,6 @@ my $dbh = SqlConnect;
 
 my $WAITING = 'waiting';
 my $OK = 'ok';
-#my $WAITING = 'ok';
-#my $OK = 'waiting';
-
-
 
 
 my $stop_file = $STOP_DAEMON_FILE;
