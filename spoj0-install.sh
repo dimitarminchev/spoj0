@@ -40,7 +40,7 @@ service apache2 reload
 
 # START AND IMPORT SETS
 ./spoj0-control.pl start
-./spoj0-control.pl import-set trivial
+./spoj0-control.pl import-set test
 
 # 1 = hello, 2 = a+b
 ./spoj0-control.pl submit 1 2 ./test/hello_ok.java java hello_ok.java
