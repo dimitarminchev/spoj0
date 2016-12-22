@@ -27,8 +27,8 @@ mysql -p < spoj0.sql
 
 # APACHE
 cat <<EOT > /etc/apache2/sites-available/spoj0.conf
-Alias /spoj /home/spoj0/web2
-<Directory /home/spoj0/web2>
+Alias /spoj /home/spoj0/web
+<Directory /home/spoj0/web>
 Options MultiViews Indexes Includes FollowSymLinks ExecCGI
 AllowOverride All
 Require all granted
