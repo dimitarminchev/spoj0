@@ -12,7 +12,7 @@ $ext = $conn->real_escape_string($_REQUEST["ext"]);
 
 // sql & execute
 $sql = "SELECT p.letter, c.set_code FROM problems as p, contests as c WHERE p.contest_id = c.contest_id AND p.problem_id=$id";
-echo $sql;
+// echo $sql;
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 
