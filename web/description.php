@@ -80,6 +80,14 @@ $name = $row["c_name"];
 $letter = strtoupper($row["letter"]);
 $about = $row["about"];
 
+
+// NEW: Contest start time check!
+$cstart = $row["c_start"];
+$start = time() - strtotime($cstart);
+if($start >= 0)
+{
+
+
 // header
 echo<<<EOT
 <h1>Условие</h1>
@@ -114,7 +122,7 @@ EOT;
 // file path
 $filepath = $SETS_DIR."/".$row["c_code"]."/".$row["letter"];
 
-// TODO: read and print all description files
+// Read and print all description files
 $files = glob("$filepath/description.*");
 if(!empty($files))
 {
@@ -148,6 +156,16 @@ $conn->close();
 
 </div>
 <!-- /Основно съдържание -->
+
+
+<?php
+// NEW: Not started yet!
+} else {
+$cstart = (new DateTime($cstart))->format("Състезанието започва на <b>d.m.Y</b> от <b>H:i</b> часа.");
+echo  "<div class='jumbotron alert-danger'><h1>Проблем</h1><p>".$cstart."</p></div>";
+}
+?>
+
 
 <!-- Заключителна част -->
 <div class="container">
