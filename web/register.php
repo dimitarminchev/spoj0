@@ -145,7 +145,7 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 
 <!-- Заключителна част -->
 <div class="container">
-<hr><p><a target="_blank" href="http://www.minchev.eu">Димитър Минчев</a> &copy; 2016</p>
+<hr><p><a target="_blank" href="http://www.minchev.eu">Димитър Минчев</a> &copy; <?php echo date("Y"); ?></p>
 </div>
 <!-- /footer -->
 

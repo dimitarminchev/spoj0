@@ -169,7 +169,7 @@ echo  "<div class='jumbotron alert-danger'><h1>Проблем</h1><p>".$cstart."
 
 <!-- Заключителна част -->
 <div class="container">
-<hr><p><a target="_blank" href="http://www.minchev.eu">Димитър Минчев</a> &copy; 2016</p>
+<hr><p><a target="_blank" href="http://www.minchev.eu">Димитър Минчев</a> &copy; <?php echo date("Y"); ?></p>
 </div>
 <!-- /footer -->
 
