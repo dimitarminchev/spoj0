@@ -3,7 +3,7 @@
 
 # INSTALL PACKAGES
 apt-get update
-apt-get install launchtool libapache2-mod-perl2 apache2 mysql-server mysql-client libdbi-perl libdbd-mysql-perl default-jdk g++ mono-mcs --fix-missing
+apt-get install php php-mcrypt php-mysql apache2 libapache2-mod-php libapache2-mod-perl2 mysql-server mysql-client libdbi-perl libdbd-mysql-perl launchtool default-jdk g++ mono-mcs --fix-missing
 
 # CREATE USERS
 useradd --create-home --password spoj0 spoj0
