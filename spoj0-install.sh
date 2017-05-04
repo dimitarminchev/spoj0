@@ -22,8 +22,8 @@ chmod 755 *.pl
 chmod 755 *.sh
 
 # MYSQL
-echo -n "MYSQL: "
-mysql -p < spoj0.sql
+echo -n "MYSQL ROOT USER PASSWORD: "
+mysql -u root -p < spoj0.sql
 
 # APACHE
 cat <<EOT > /etc/apache2/sites-available/spoj0.conf
