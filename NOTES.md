@@ -1,4 +1,5 @@
 ## Import Structure 
+File structure of the single contest: 
 ```
 sets
 	<set-code>
@@ -10,15 +11,16 @@ sets
 			[problem-info.conf -- future]
 			[checker -- future]
 ```
-
 ## Database Structure 
-
+Table:
+```
 users
 	name
 	password
 	display-name
 	comment
-	
+```
+Query:
 ```
 CREATE TABLE  `spoj`.`users` (
   `user_id` int(11) NOT NULL auto_increment,
@@ -29,7 +31,8 @@ CREATE TABLE  `spoj`.`users` (
   PRIMARY KEY  (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='User accounts (may be teams also)'
 ```	
-	
+Table :
+```
 contest
 	contest_id -- int (primary key)
 	set_code -- the contest short name (like fmi-2007-03-04)
@@ -37,7 +40,8 @@ contest
 	start_time -- from what time the contest will be visible
 	duration -- how long will it be in minutes (usually 300)
 	show_sources (bool - whether to show sources '''after''' the contest)
-	
+```
+Query:
 ```
 CREATE TABLE  `spoj`.`contests` (
   `contest_id` int(11) NOT NULL auto_increment,
@@ -50,7 +54,8 @@ CREATE TABLE  `spoj`.`contests` (
   PRIMARY KEY  (`contest_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='User accounts (may be teams also)'
 ```
-
+Table:
+```
 runs
 	run_id -- int (primary key)
 	problem_id -- fk
@@ -58,8 +63,9 @@ runs
 	language (java, cpp ...)
 	source-code -- the whole source code
 	source-name -- the name of the source file (may be needed for java, or may be autodetected)
-	status (waiting, judging,
-	 
+	status (waiting, judging,	 
+```
+Query:
 ```
 CREATE TABLE  `spoj`.`runs` (
   `run_id` int(11) NOT NULL auto_increment,
@@ -78,7 +84,8 @@ CREATE TABLE  `spoj`.`runs` (
   CONSTRAINT `fk_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 ```
-
+Table:
+```
 problems 
 	problem_id -- pk
 	contest_id -- fk
@@ -88,7 +95,8 @@ problems
 	about -- notes about the problem
 	[checker -- future (diff, float(precision), etc)]
 	[memory_limit] -- future
-
+```
+Query:
 ```
 CREATE TABLE  `spoj`.`problems` (
   `problem_id` int(11) NOT NULL auto_increment,
@@ -102,8 +110,3 @@ CREATE TABLE  `spoj`.`problems` (
   CONSTRAINT `new_fk_constraint` FOREIGN KEY (`contest_id`) REFERENCES `contests` (`contest_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 ```
-
-
-
-
-
