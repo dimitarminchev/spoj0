@@ -1,5 +1,5 @@
 ## Import Structure 
-
+```
 sets
 	<set-code>
 		[set-info.conf -- future, for automatic import of a set]
@@ -9,7 +9,8 @@ sets
 			[solution-<something>.{c,cpp,java}]
 			[problem-info.conf -- future]
 			[checker -- future]
-							
+```
+
 ## Database Structure 
 
 users
