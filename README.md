@@ -3,7 +3,7 @@
 Autor: Milo Sredkov, Contributor: Dimitar Minchev, Blog: [minchev.eu][1]
 
 ## Requirements
-Linux Ubuntu Server 16.10, Apache 2, MySQL 5, PHP 5 and PERL.
+Linux Ubuntu Server, Apache, MySQL, PHP and PERL.
 
 ## Installation
 Log in to your Linux server, stay in your home directory and execute following lines:
