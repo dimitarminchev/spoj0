@@ -1,4 +1,4 @@
-=== Import Structure ===
+## Import Structure 
 
 sets
 	<set-code>
@@ -10,7 +10,7 @@ sets
 			[problem-info.conf -- future]
 			[checker -- future]
 							
-=== Database Structure ===
+## Database Structure 
 
 users
 	name
