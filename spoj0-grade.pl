@@ -174,15 +174,14 @@ sub Run{
 		
 		my $exit = System $megarun;
 		warn $exit;
-		if($exit == 35072){
-			#killed - timeout
-			$status = 'tl1';
-		}
-		#elsif($exit != 0 || -s "$EXEC_DIR/run.err"){
-		#	$status = 're';
-		#}
-		elsif($exit != 0){
-                       $status = 're';
+		
+		if($exit == 31744 || $exit == 35072) # new return code
+		{
+                        # killed because timeout
+                        $status = 'tl1';
+                }
+                elsif($exit != 0 || -s "$EXEC_DIR/run.err"){
+                        $status = 're';
                 }
 		
 		System "cat $EXEC_DIR/time.out";
