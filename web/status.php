@@ -219,13 +219,15 @@ echo "<p><u>Бележка</u>: На страницата са изведени 
 
 // info
 echo<<<EOT
-<p><u>Легенда</u>:&nbsp;
-<span class='label label-success'>OK</span> = успешно решение,&nbsp;
-<span class='label label-warning'>WA</span> = неверен отговор,&nbsp;
-<span class='label label-warning'>PE</span> = неправилно представяне,&nbsp;
-<span class='label label-danger'>RE</span> = грешка при изпълнение,&nbsp;
-<span class='label label-danger'>CE</span> = грешка при компилиране.</p>
+<p><u>Legend</u>:&nbsp;
+<span class='label label-success'>OK</span> = successful solution,&nbsp;
+<span class='label label-warning'>WA</span> = wrong answer,&nbsp;
+<span class='label label-warning'>PE</span> = presentation error,&nbsp;
+<span class='label label-danger'>RE</span> = runtime error,&nbsp;
+<span class='label label-danger'>CE</span> = compilation error,&nbsp;
+<span class='label label-danger'>TL</span> = time limit.</p>
 EOT;
+
 
 // close
 $conn->close();
