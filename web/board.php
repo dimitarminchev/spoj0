@@ -43,6 +43,8 @@
 
 
 <?php
+// refresh
+header("refresh: 5;");
 // init
 include("init.php");
 
