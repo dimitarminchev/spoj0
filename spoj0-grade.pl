@@ -1,12 +1,10 @@
 #!/usr/bin/perl
-
 use strict;
 use DBI;
 use spoj0;
 
 # should be invoked with a signle agrument - the run_id
 # does not check the status, so may be used to redjudge
-
 
 #close STDOUT;
 #open STDOUT, '>$EXEC_DIR/grade.log';
@@ -27,9 +25,7 @@ sub Limit{
 	return $data;
 }
 
-
 my $run_id = shift or die;
-
 
 my $dbh = SqlConnect;
 
@@ -51,9 +47,7 @@ $contest_st->execute() or die "Unable to execute statment : $!";
 my $contest = $contest_st->fetchrow_hashref;
 $contest_st->finish;
 
-
 my $prob_dir = "$SETS_DIR/".$$contest{'set_code'}."/".$$problem{'letter'};
-
 
 #some paths:
 #my $ex = '/home/spojrun';
@@ -61,7 +55,6 @@ my $prob_dir = "$SETS_DIR/".$$contest{'set_code'}."/".$$problem{'letter'};
 
 #System "rm $EXEC_DIR/grade.log";
 System "echo '==== Run $run_id ===='";
-
 
 #chdir "./execute" or die "unable to chdir to execute";
 
@@ -88,11 +81,8 @@ my $lang = $$run{'language'};
 my $java_main = '';
 if($lang eq 'cpp'){
 	WriteFile "$EXEC_DIR/program.cpp", $$run{'source_code'};
-
 	System "su spoj0run -c \"g++ -O2 $EXEC_DIR/program.cpp -std=c++11 -o $EXEC_DIR/program\" ";
-        #System "g++ -O2 $EXEC_DIR/program.cpp -std=c++11 -o $EXEC_DIR/program";
 	$status = 'ce' if(not -f "$EXEC_DIR/program");
-
 }
 elsif($lang eq 'java'){
 	$java_main = JavaMain;
@@ -108,7 +98,6 @@ elsif($lang eq 'cs'){
 else{
 	die "Unsupported language $lang!";
 }
-
 
 #dont do it for now
 #System 'rm $EXEC_DIR/*'; 
@@ -167,21 +156,19 @@ sub Run{
 		}
 		
 		my $run = "time timeout $gross_time $exec < $run_in >$run_out 2>>$EXEC_DIR/run.err";
-		
-		
+				
 		my $megarun = "launchtool --stats --tag=spoj0-grade --limit-process-count=30 "
 			."--limit-open-files=60 --user=spoj0run '$run' > $EXEC_DIR/time.out";
 		
 		my $exit = System $megarun;
 		warn $exit;
 		
-		if($exit == 31744 || $exit == 35072) # new return code
-		{
-                        # killed because timeout
+		# new killed because timeout exit code
+		if($exit == 31744 || $exit == 35072) {                        
                         $status = 'tl1';
                 }
-                elsif($exit != 0 || -s "$EXEC_DIR/run.err"){
-                        $status = 're';
+                elsif($exit != 0 || -s "$EXEC_DIR/run.err") {
+                        $status = 're';		
                 }
 		
 		System "cat $EXEC_DIR/time.out";
@@ -241,8 +228,6 @@ if($status eq 'ok'){ #run
 		}
 	}
 }
-
-
 
 
 my $log = "=== GRADE ===\n";
