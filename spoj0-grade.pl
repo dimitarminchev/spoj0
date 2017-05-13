@@ -7,6 +7,7 @@ use spoj0;
 # should be invoked with a signle agrument - the run_id
 # does not check the status, so may be used to redjudge
 
+
 #close STDOUT;
 #open STDOUT, '>$EXEC_DIR/grade.log';
 #close STDERR;
@@ -26,7 +27,9 @@ sub Limit{
 	return $data;
 }
 
+
 my $run_id = shift or die;
+
 
 my $dbh = SqlConnect;
 
@@ -48,7 +51,9 @@ $contest_st->execute() or die "Unable to execute statment : $!";
 my $contest = $contest_st->fetchrow_hashref;
 $contest_st->finish;
 
+
 my $prob_dir = "$SETS_DIR/".$$contest{'set_code'}."/".$$problem{'letter'};
+
 
 #some paths:
 #my $ex = '/home/spojrun';
@@ -161,20 +166,24 @@ sub Run{
 		}
 		
 		my $run = "time timeout $gross_time $exec < $run_in >$run_out 2>>$EXEC_DIR/run.err";
-				
+		
+		
 		my $megarun = "launchtool --stats --tag=spoj0-grade --limit-process-count=30 "
 			."--limit-open-files=60 --user=spoj0run '$run' > $EXEC_DIR/time.out";
 		
-		my $exit = System $megarun;		
+		my $exit = System $megarun;
 		warn $exit;
-
-		# new killed because timeout exit code
-		if($exit == 31744 || $exit == 35072){
+		
+		# killed because timeout new status code
+		if($exit == 35072 || $exit == 31744){
 			$status = 'tl1';
 		}
-		elsif($exit != 0 || -s "$EXEC_DIR/run.err") {
-            $status = 're';		
-        }
+		#elsif($exit != 0 || -s "$EXEC_DIR/run.err"){
+		#	$status = 're';
+		#}
+		elsif($exit != 0){
+                       $status = 're';
+                }
 		
 		System "cat $EXEC_DIR/time.out";
 		if($status eq 'tl1' || $status eq 'ok'){
@@ -186,6 +195,8 @@ sub Run{
 			$status = 'tl' if($runned > $time);
 			warn "Program consumed $runned seconds cpu time.\n";
 		}
+		
+		
 	}
 	
 	if($status eq 'ok'){ #check
@@ -213,6 +224,7 @@ sub Run{
 			}
 		}
 	}	
+	
 }
 
 if($status eq 'ok'){ #run
@@ -239,6 +251,7 @@ $log .= Limit ReadFile("$EXEC_DIR/grade.err");
 #$log .= ReadFile "$ex/run.log";
 $log .= "=== RUN ERR ===\n";
 $log .= Limit(ReadFile("$EXEC_DIR/run.err"));
+
 
 my $final_st = $dbh->prepare("UPDATE runs SET status=?, log=? WHERE run_id=?");
 $final_st->bind_param(1, $status);
