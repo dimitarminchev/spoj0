@@ -10,12 +10,6 @@ IDENTIFIED BY 'stancho3' WITH GRANT OPTION;
 -- Table structure for table `contests`
 --
 
-DROP TABLE IF EXISTS `runs`;
-DROP TABLE IF EXISTS `users`;
-DROP TABLE IF EXISTS `problems`;
-DROP TABLE IF EXISTS `contests`;
-
-
 DROP TABLE IF EXISTS `contests`;
 CREATE TABLE `contests` (
   `contest_id` int(11) NOT NULL auto_increment,
@@ -44,10 +38,6 @@ CREATE TABLE `problems` (
   KEY `new_fk_constraint` (`contest_id`),
   CONSTRAINT `new_fk_constraint` FOREIGN KEY (`contest_id`) REFERENCES `contests` (`contest_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `problems`
---
 
 --
 -- Table structure for table `users`
@@ -99,12 +89,9 @@ CREATE TABLE `runs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `runs`
+-- Table structure for table `news`
 --
 
---
--- Table structure for table `runs`
---
 DROP TABLE IF EXISTS `news`;
 CREATE TABLE `news` (
   `new_id` int(11) NOT NULL auto_increment,
@@ -115,3 +102,24 @@ CREATE TABLE `news` (
   PRIMARY KEY  (`new_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- 
+-- Table structure for table `questions` 
+-- 
+
+DROP TABLE IF EXISTS `questions`;
+CREATE TABLE `questions` (
+  `question_id` int(11) NOT NULL AUTO_INCREMENT,
+  `problem_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `question_time` datetime NOT NULL COMMENT 'when the question is submited',
+  `content` text NOT NULL COMMENT 'the questions contents',
+  `status` char(32) NOT NULL,
+  `answer_time` datetime NOT NULL COMMENT 'when the answer is submited',
+  `answer_content` text NOT NULL COMMENT 'the answer contents',
+  PRIMARY KEY (`question_id`),
+  KEY `fk2_problems` (`problem_id`),
+  KEY `fk2_users` (`user_id`),
+  CONSTRAINT `fk2_problems` FOREIGN KEY (`problem_id`) REFERENCES `problems`
+(`problem_id`),
+  CONSTRAINT `fk2_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

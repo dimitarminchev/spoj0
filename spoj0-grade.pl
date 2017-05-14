@@ -4,17 +4,10 @@ use strict;
 use DBI;
 use spoj0;
 
-# should be invoked with a signle agrument - the run_id
+# Should be invoked with a signle agrument - the run_id
 # does not check the status, so may be used to redjudge
 
-
-#close STDOUT;
-#open STDOUT, '>$EXEC_DIR/grade.log';
-#close STDERR;
-#open STERR, '>$EXEC_DIR/grade.err';
-
-#limits a string to a reasonable amount...
-#the amount is 2048 
+# Limits a string to a reasonable amount of 2048
 sub Limit{
 	my $in = shift or "";
 	my $data = $in;
@@ -27,10 +20,10 @@ sub Limit{
 	return $data;
 }
 
-
+# Run Identifier
 my $run_id = shift or die;
 
-
+# Database
 my $dbh = SqlConnect;
 
 my $run_st = $dbh->prepare("SELECT * FROM runs WHERE run_id=?");
@@ -51,20 +44,13 @@ $contest_st->execute() or die "Unable to execute statment : $!";
 my $contest = $contest_st->fetchrow_hashref;
 $contest_st->finish;
 
-
+# Path
 my $prob_dir = "$SETS_DIR/".$$contest{'set_code'}."/".$$problem{'letter'};
 
-
-#some paths:
-#my $ex = '/home/spojrun';
-#my $sets = './sets';
-
-#System "rm $EXEC_DIR/grade.log";
+# Info
 System "echo '==== Run $run_id ===='";
 
-#chdir "./execute" or die "unable to chdir to execute";
-
-#cleanup
+# Cleanup
 System "rm $EXEC_DIR/program";
 System "rm $EXEC_DIR/program.cpp";
 System "rm $EXEC_DIR/test.in";
@@ -77,7 +63,7 @@ System "rm $EXEC_DIR/*.class";
 System "rm $EXEC_DIR/*.java";
 
 sub JavaMain{
-#TODO: limitation - only one top level class, default package
+	# TODO: limitation - only one top level class, default package
 	$$run{'source_name'} =~ /^(.+)\.java$/ or die "What source name!?";
 	return $1;
 }
@@ -85,20 +71,21 @@ sub JavaMain{
 my $status = 'ok';
 my $lang = $$run{'language'};
 my $java_main = '';
+# C++
 if($lang eq 'cpp'){
 	WriteFile "$EXEC_DIR/program.cpp", $$run{'source_code'};
-
-	System "su spoj0run -c \"g++ -O2 $EXEC_DIR/program.cpp -std=c++11 -o $EXEC_DIR/program\" ";
-        #System "g++ -O2 $EXEC_DIR/program.cpp -std=c++11 -o $EXEC_DIR/program";
+	System "su spoj0run -c \"g++ -O2 $EXEC_DIR/program.cpp -std=c++11 -o $EXEC_DIR/program\" ";        
 	$status = 'ce' if(not -f "$EXEC_DIR/program");
 
 }
+# Java
 elsif($lang eq 'java'){
 	$java_main = JavaMain;
 	WriteFile "$EXEC_DIR/$java_main.java", $$run{'source_code'};
 	System "su spoj0run -c \"javac $EXEC_DIR/$java_main.java\" ";
 	$status = 'ce' if(not -f "$EXEC_DIR/$java_main.class");
 }
+# C#
 elsif($lang eq 'cs'){
 	WriteFile "$EXEC_DIR/program.cs", $$run{'source_code'};
         System "su spoj0run -c \"mcs -out:$EXEC_DIR/program.exe  $EXEC_DIR/program.cs\"";
@@ -108,23 +95,16 @@ else{
 	die "Unsupported language $lang!";
 }
 
-
-#dont do it for now
-#System 'rm $EXEC_DIR/*'; 
-
-#-- ! making
-
-#now we will determine how to check
-#	if test.01.in doesnt exist, then the solution will be checked against single file
-#	else the check starts with test.01.in, and continues until test.??.in is present
-
-#run against given input infix (infix is the part between 'test' and '.in'
+# Making
+# ---
+# Now we will determine how to check
+# - if test.01.in doesnt exist, then the solution will be checked against single file
+# - else the check starts with test.01.in, and continues until test.??.in is present
+# Run against given input infix (infix is the part between 'test' and '.in'
 sub Run{
-	my $infix = shift;
-		
+	my $infix = shift;		
 	my $set_in = "$prob_dir/test$infix.in";
-	my $set_ans = "$prob_dir/test$infix.ans";
-	
+	my $set_ans = "$prob_dir/test$infix.ans";	
 	print "Testing $infix\n";
 	
 	if(! -f $set_in){
@@ -139,19 +119,22 @@ sub Run{
 	my $run_in = "$EXEC_DIR/test.in";
 	my $run_out = "$EXEC_DIR/test.out";
 	
-	if($status eq 'ok'){ #run
+	if($status eq 'ok'){ 
+		# Run
 		chdir($EXEC_DIR);
 		
-		#copy input
+		# Copy input
 		System "cp '$set_in' '$run_in'";
 		
+		# Time
 		my $time = $$problem{'time_limit'};
 		++$time if $lang eq 'java';
-		#-- ! executing
 		
-		my $gross_time = 3*$time; #timeout time
-		
+		# Timeout time	
+		my $gross_time = 3*$time; 		
 		my $exec = '';
+
+		# Languages
 		if($lang eq 'cpp'){
 			$exec = "$EXEC_DIR/program";
 		}
@@ -165,12 +148,9 @@ sub Run{
 			die "Unsupported language $lang!";
 		}
 		
-		my $run = "time timeout $gross_time $exec < $run_in >$run_out 2>>$EXEC_DIR/run.err";
-		
-		
-		my $megarun = "launchtool --stats --tag=spoj0-grade --limit-process-count=30 "
-			."--limit-open-files=60 --user=spoj0run '$run' > $EXEC_DIR/time.out";
-		
+		# Executing
+		my $run = "time timeout $gross_time $exec < $run_in >$run_out 2>>$EXEC_DIR/run.err";			
+		my $megarun = "launchtool --stats --tag=spoj0-grade --limit-process-count=30 --limit-open-files=60 --user=spoj0run '$run' > $EXEC_DIR/time.out";		
 		my $exit = System $megarun;
 		warn $exit;
 		
@@ -187,26 +167,26 @@ sub Run{
 		
 		System "cat $EXEC_DIR/time.out";
 		if($status eq 'tl1' || $status eq 'ok'){
-			#check cpu+user time
+			# Check cpu+user time
 			my $time_info = ReadFile "$EXEC_DIR/time.out";
-			#example: Time: running: 00:00:00 user: 0.000000s system: 0.004000s
+			# Example: Time: running: 00:00:00 user: 0.000000s system: 0.004000s
 			$time_info =~ /Time: running: \d+:\d+:\d+ user: (\d+\.\d+)s system: (\d+\.\d+)s/ or warn;
 			my $runned = $1 + $2;
 			$status = 'tl' if($runned > $time);
 			warn "Program consumed $runned seconds cpu time.\n";
 		}
 		
-		
 	}
 	
-	if($status eq 'ok'){ #check
+	# Check status
+	if($status eq 'ok'){ 
 		if(-f "$prob_dir/checker"){
 			print "Running checker...\n";
 			my $exit = System "$prob_dir/checker $set_in $set_ans $run_out";
 			print "exit=$exit\n";
 			warn "checker exit=$exit\n";
 			$status = 'ok' if($exit == 0);
-			#bugfix - why 1 -> 256?
+			# Bugfix - why 1 -> 256?
 			$status = 'wa' if($exit == 1 || $exit == 256);
 			$status = 'ie' if($exit != 0 && $exit != 1 && $exit != 256);
 		}
@@ -224,7 +204,6 @@ sub Run{
 			}
 		}
 	}	
-	
 }
 
 if($status eq 'ok'){ #run
@@ -243,6 +222,7 @@ if($status eq 'ok'){ #run
 	}
 }
 
+# Info
 my $log = "=== GRADE ===\n";
 $log .= Limit ReadFile("$EXEC_DIR/grade.log");
 $log .= "=== GRADE ERR ===\n";
@@ -252,7 +232,7 @@ $log .= Limit ReadFile("$EXEC_DIR/grade.err");
 $log .= "=== RUN ERR ===\n";
 $log .= Limit(ReadFile("$EXEC_DIR/run.err"));
 
-
+# Update Database
 my $final_st = $dbh->prepare("UPDATE runs SET status=?, log=? WHERE run_id=?");
 $final_st->bind_param(1, $status);
 $final_st->bind_param(2, $log);
