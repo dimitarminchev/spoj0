@@ -63,7 +63,6 @@ $lang = parse_ini_file("$language.ini",true);
 </nav>
 
 
-
 <!-- Основно съдържание -->
 <div class="container">
 

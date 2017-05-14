@@ -14,26 +14,50 @@
 </head>
 <body>
 
+<?php
+//  Текуща страница
+$active = "status";
+
+// Стартира сесия
+session_start();
+
+// Избор на език
+$language = "bulgarian"; // default language
+if(isset($_REQUEST["lang"]))
+if($_REQUEST["lang"] == "en") $_SESSION["spoj0"]["lang"] = "english";
+else $_SESSION["spoj0"]["lang"] = "bulgarian";
+if(isset($_SESSION["spoj0"]["lang"])) $language = $_SESSION["spoj0"]["lang"];
+
+// Зареждане на езиковите настройки
+$lang = parse_ini_file("$language.ini",true);
+?>
+
 <!-- Навигация -->
 <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Навигация</span>
+            <span class="sr-only"><?php echo $lang["index"]["nav"]; // Навигация ?></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-	  <a class="navbar-brand" href="#">SPOJ</a>
+		  <a class="navbar-brand" href="#">SPOJ</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="index.php">Състезания</a></li>
-            <li><a href="submit.php">Решение</a></li>
-            <li class="active"><a href="status.php">Статус</a></li>
-	    <li><a href="register.php">Регистрация</a></li>
+		    <li <?php if($active=="news") echo 'class="active"'; ?>><a href="news.php"><?php echo $lang["index"]["news"]; // Новини ?></a></li>
+            <li <?php if($active=="contests") echo 'class="active"'; ?>><a href="index.php"><?php echo $lang["index"]["contests"]; // Състезания ?></a></li>
+            <li <?php if($active=="submit") echo 'class="active"'; ?>><a href="submit.php"><?php echo $lang["index"]["submit"]; // Решение ?></a></li>
+            <li <?php if($active=="status") echo 'class="active"'; ?>><a href="status.php"><?php echo $lang["index"]["status"]; // Статус ?></a></li>
+			<li <?php if($active=="register") echo 'class="active"'; ?>><a href="register.php"><?php echo $lang["index"]["register"]; // Регистрация ?></a></li>
+			<li <?php if($active=="questions") echo 'class="active"'; ?>><a href="questions.php"><?php echo $lang["index"]["questions"]; // Въпроси ?></a></li>
+			<li <?php if($language=="bulgarian") echo 'class="active"'; ?>><a href="index.php?lang=bg"><img src="assets/bg.png" width="25px" /> Български</a></li>
+			<li <?php if($language=="english") echo 'class="active"'; ?>><a href="index.php?lang=en"><img src="assets/uk.png" width="25px" /> English</a></li>
+			<li><a href="#"><?php echo date("d.m.y H:i:s"); ?></a></li>
           </ul>
         </div>
+		
       </div>
 </nav>
 
