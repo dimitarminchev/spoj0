@@ -1,65 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="author" content="Dimitar Minchev">
-<title>SPOJ</title>
-<!-- Bootstrap -->
-<link rel="stylesheet" href="assets/bootstrap.min.css" >
-<link rel="stylesheet" href="assets/bootstrap-theme.min.css">
-<link rel="stylesheet" href="assets/bootstrap-table.min.css">
-<style>body { padding-top: 50px; }</style>
-</head>
-<body>
-
 <?php
-//  Текуща страница
-$active = "contests";
+// Текуща страница
+$page = "contests";
 
-// Стартира сесия
-session_start();
-
-// Избор на език
-$language = "bulgarian"; // default language
-if(isset($_REQUEST["lang"]))
-if($_REQUEST["lang"] == "en") $_SESSION["spoj0"]["lang"] = "english";
-else $_SESSION["spoj0"]["lang"] = "bulgarian";
-if(isset($_SESSION["spoj0"]["lang"])) $language = $_SESSION["spoj0"]["lang"];
-
-// Зареждане на езиковите настройки
-$lang = parse_ini_file("$language.ini",true);
+// Заглавна част на документа
+include("header.php");
 ?>
 
-<!-- Навигация -->
-<nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only"><?php echo $lang["index"]["nav"]; // Навигация ?></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-		  <a class="navbar-brand" href="#">SPOJ</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-		    <li <?php if($active=="news") echo 'class="active"'; ?>><a href="news.php"><?php echo $lang["index"]["news"]; // Новини ?></a></li>
-            <li <?php if($active=="contests") echo 'class="active"'; ?>><a href="index.php"><?php echo $lang["index"]["contests"]; // Състезания ?></a></li>
-            <li <?php if($active=="submit") echo 'class="active"'; ?>><a href="submit.php"><?php echo $lang["index"]["submit"]; // Решение ?></a></li>
-            <li <?php if($active=="status") echo 'class="active"'; ?>><a href="status.php"><?php echo $lang["index"]["status"]; // Статус ?></a></li>
-			<li <?php if($active=="register") echo 'class="active"'; ?>><a href="register.php"><?php echo $lang["index"]["register"]; // Регистрация ?></a></li>
-			<li <?php if($active=="questions") echo 'class="active"'; ?>><a href="questions.php"><?php echo $lang["index"]["questions"]; // Въпроси ?></a></li>
-			<li <?php if($language=="bulgarian") echo 'class="active"'; ?>><a href="index.php?lang=bg"><img src="assets/bg.png" width="25px" /> Български</a></li>
-			<li <?php if($language=="english") echo 'class="active"'; ?>><a href="index.php?lang=en"><img src="assets/uk.png" width="25px" /> English</a></li>
-			<li><a href="#"><?php echo date("d.m.y H:i:s"); ?></a></li>
-          </ul>
-        </div>
-		
-      </div>
-</nav>
+
 
 <!-- Основно съдържание -->
 <div class="container">
@@ -70,7 +17,11 @@ $lang = parse_ini_file("$language.ini",true);
 include("init.php");
 
 // contest number
-if(!isset($_REQUEST["id"])) die("<div class='jumbotron alert-danger'><h1>Проблем</h1><p>Няма посочен номер на задача.<p></div>");
+if(!isset($_REQUEST["id"])) 
+die( sprintf("<div class='jumbotron alert-danger'><h1> %s </h1><p> %s.<p></div>",
+	$lang["description"]["problem"],
+	$lang["description"]["info1"]
+));
 $id = (int)$_REQUEST["id"];
 
 // sql
@@ -99,48 +50,53 @@ EOT;
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 
+// NEW: Contest start time check!
+if($row["c_ustart"] > $row["unow"])
+die( sprintf("<div class='jumbotron alert-danger'><h1> %s </h1><p> %s.<p></div>",
+	$lang["description"]["problem"],
+	$lang["description"]["info2"]
+));
+$id = (int)$_REQUEST["id"];
+
 // data for header
 $name = $row["c_name"];
 $letter = strtoupper($row["letter"]);
 $about = $row["about"];
 
-
-// NEW: Contest start time check!
-$cstart = $row["c_start"];
-$start = time() - strtotime($cstart);
-if($start >= 0)
-{
-
-
 // header
-echo<<<EOT
-<h1>Условие</h1>
+$text = <<<EOT
+<h1> %s </h1>
 <div class="row">
 <!-- 1 -->
 <div class="col-md-6">
 <div class="panel panel-default">
-<div class="panel-heading"><h3 class="panel-title">състезание</h3></div>
+<div class="panel-heading"><h3 class="panel-title"> %s </h3></div>
 <div class="panel-body"><h3>$name</h3></div>
 </div>
 </div>
 <!-- 2 -->
 <div class="col-md-3">
 <div class="panel panel-default">
-<div class="panel-heading"><h3 class="panel-title">буква</h3></div>
+<div class="panel-heading"><h3 class="panel-title"> %s </h3></div>
 <div class="panel-body"><h3>$letter</h3></div>
 </div>
 </div>
 <!-- 3 -->
 <div class="col-md-3">
 <div class="panel panel-default">
-<div class="panel-heading"><h3 class="panel-title">инфо</h3></div>
+<div class="panel-heading"><h3 class="panel-title"> %s </h3></div>
 <div class="panel-body"><h3>$about</h3></div>
 </div>
 </div>
 </div>
 <!-- /row -->
 EOT;
-
+echo sprintf( $text, 
+	$lang["description"]["description"], 
+	$lang["description"]["contest"], 
+	$lang["description"]["letter"], 
+	$lang["description"]["about"]
+);
 
 
 // file path
@@ -168,41 +124,29 @@ echo "<pre style='white-space: pre-line; font-family:courier; font-size: 16pt;'>
 
 // close
 $conn->close();
+
+
+// buttons
+$text = <<<EOT
+<p>
+<a class="btn btn-primary btn-lg" href="javascript:history.back();" role="button"> %s </a>
+<a class="btn btn-info btn-lg" href="submit.php?id=$id" role="button"> %s </a>
+</p>
+EOT;
+echo sprintf( $text, 
+	$lang["description"]["problems"], 
+	$lang["description"]["submit"]
+);
 ?>
 
 
-<!-- button -->
-<p>
-<a class="btn btn-primary btn-lg" href="javascript:history.back();" role="button">Задачи</a>
-<a class="btn btn-info btn-lg" href="submit.php?id=<?php echo $id; ?>" role="button">Решение</a>
-</p>
 
 
 </div>
 <!-- /Основно съдържание -->
 
 
+
 <?php
-// NEW: Not started yet!
-} else {
-$cstart = (new DateTime($cstart))->format("Състезанието започва на <b>d.m.Y</b> от <b>H:i</b> часа.");
-echo  "<div class='jumbotron alert-danger'><h1>Проблем</h1><p>".$cstart."</p></div>";
-}
-?>
-
-
-<!-- Заключителна част -->
-<div class="container">
-<hr><p><a target="_blank" href="http://www.minchev.eu">Димитър Минчев</a> &copy; <?php echo date("Y"); ?></p>
-</div>
-<!-- /footer -->
-
-<!-- jQuery JavaScript Payload -->
-<script src="assets/jquery.min.js"></script>
-<!-- BootStrap JavaScript PayLoad -->
-<script src="assets/bootstrap.min.js"></script>
-<script src="assets/bootstrap-table.min.js"></script>
-
-</body>
-</html>
-
+// Заключителна част на документа
+include("footer.php");

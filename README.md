@@ -1,6 +1,8 @@
 #SPOJ
 **S**imple **P**rogramming contests **O**nline **J**udge system.
-Autor: Milo Sredkov, Contributor: Dimitar Minchev, Blog: [minchev.eu][1]
+Autor: Milo Sredkov, 
+Contributor: Dimitar Minchev, Blog: [minchev.eu][1], E-mail:  <mailto:dimitar.minchev@gmail.com>,
+Contributor: Ivo Kamenarov, E-mail: <mailto:ikk@ami.uni-ruse.bg>
 
 ## Requirements
 Linux Ubuntu Server, Apache, MySQL, PHP and PERL.

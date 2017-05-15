@@ -1,65 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="author" content="Dimitar Minchev">
-<title>SPOJ</title>
-<!-- Bootstrap -->
-<link rel="stylesheet" href="assets/bootstrap.min.css" >
-<link rel="stylesheet" href="assets/bootstrap-theme.min.css">
-<link rel="stylesheet" href="assets/bootstrap-table.min.css">
-<style>body { padding-top: 50px; }</style>
-</head>
-<body>
-
 <?php
-//  Текуща страница
-$active = "contests";
+// Текуща страница
+$page = "contests";
 
-// Стартира сесия
-session_start();
-
-// Избор на език
-$language = "bulgarian"; // default language
-if(isset($_REQUEST["lang"]))
-if($_REQUEST["lang"] == "en") $_SESSION["spoj0"]["lang"] = "english";
-else $_SESSION["spoj0"]["lang"] = "bulgarian";
-if(isset($_SESSION["spoj0"]["lang"])) $language = $_SESSION["spoj0"]["lang"];
-
-// Зареждане на езиковите настройки
-$lang = parse_ini_file("$language.ini",true);
+// Заглавна част на документа
+include("header.php");
 ?>
 
-<!-- Навигация -->
-<nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only"><?php echo $lang["index"]["nav"]; // Навигация ?></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-		  <a class="navbar-brand" href="#">SPOJ</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-		    <li <?php if($active=="news") echo 'class="active"'; ?>><a href="news.php"><?php echo $lang["index"]["news"]; // Новини ?></a></li>
-            <li <?php if($active=="contests") echo 'class="active"'; ?>><a href="index.php"><?php echo $lang["index"]["contests"]; // Състезания ?></a></li>
-            <li <?php if($active=="submit") echo 'class="active"'; ?>><a href="submit.php"><?php echo $lang["index"]["submit"]; // Решение ?></a></li>
-            <li <?php if($active=="status") echo 'class="active"'; ?>><a href="status.php"><?php echo $lang["index"]["status"]; // Статус ?></a></li>
-			<li <?php if($active=="register") echo 'class="active"'; ?>><a href="register.php"><?php echo $lang["index"]["register"]; // Регистрация ?></a></li>
-			<li <?php if($active=="questions") echo 'class="active"'; ?>><a href="questions.php"><?php echo $lang["index"]["questions"]; // Въпроси ?></a></li>
-			<li <?php if($language=="bulgarian") echo 'class="active"'; ?>><a href="index.php?lang=bg"><img src="assets/bg.png" width="25px" /> Български</a></li>
-			<li <?php if($language=="english") echo 'class="active"'; ?>><a href="index.php?lang=en"><img src="assets/uk.png" width="25px" /> English</a></li>
-			<li><a href="#"><?php echo date("d.m.y H:i:s"); ?></a></li>
-          </ul>
-        </div>
-		
-      </div>
-</nav>
+
 
 <!-- Основно съдържание -->
 <div class="container">
@@ -142,20 +89,20 @@ $rate = array();
 while($row = $result->fetch_assoc())
 {
 	// id, time & letter
-        $id = $row["user_id"];
-        $time = ($row["s_time"] - $row["c_time"]) / 60;
+    $id = $row["user_id"];
+    $time = floor(($row["s_time"] - $row["c_time"]) / 60); // NEW
 	$letter = strtoupper($row["p_letter"]);
 
 	// user, submits & run
-        $rate[$id]["username"] = $row["u_name"];
-        $rate[$id]["submits"] = $rate[$id]["submits"] + 1;
-        $rate[$id]["runs"][$letter] = $rate[$id]["runs"][$letter] + 1;
+    $rate[$id]["username"] = $row["u_name"];
+    $rate[$id]["submits"] = $rate[$id]["submits"] + 1;
+    $rate[$id]["runs"][$letter] = $rate[$id]["runs"][$letter] + 1;
 
-        // times
+    // times
 	if(!isset($rate[$id]["answers"][$letter]) || $rate[$id]["answers"][$letter] == 0)
-        if($row["status"] == "ok")
+    if($row["status"] == "ok")
 	{
-		$rate[$id]["times"][$letter] = floor($time);
+		$rate[$id]["times"][$letter] = $time;
 	}
         else
 	{
@@ -256,17 +203,8 @@ $conn->close();
 </div>
 <!-- /Основно съдържание -->
 
-<!-- Заключителна част -->
-<div class="container">
-<hr><p><a target="_blank" href="http://www.minchev.eu">Димитър Минчев</a> &copy; <?php echo date("Y"); ?></p>
-</div>
-<!-- /footer -->
 
-<!-- jQuery JavaScript Payload -->
-<script src="assets/jquery.min.js"></script>
-<!-- BootStrap JavaScript PayLoad -->
-<script src="assets/bootstrap.min.js"></script>
-<script src="assets/bootstrap-table.min.js"></script>
 
-</body>
-</html>
+<?php
+// Заключителна част на документа
+include("footer.php");
