@@ -1,19 +1,16 @@
 <?php
-// Текуща страница
+// current page
 $page = "contests";
 
-// Заглавна част на документа
+// header
 include("header.php");
-?>
 
-
-
-<!-- Основно съдържание -->
+// container
+echo <<<EOT
+<!-- container -->
 <div class="container">
+EOT;
 
-
-
-<?php
 // init
 include("init.php");
 
@@ -45,7 +42,7 @@ die( sprintf("<div class='jumbotron alert-danger'><h1> %s </h1><p> %s.<p></div>"
 // start time
 $start = new DateTime($row["start_time"]);
 
-// header
+// contest header
 $text = <<<EOT
 <h1> %s </h1>
 <div class="row">
@@ -80,7 +77,7 @@ echo sprintf( $text,
 	$lang["contest"]["duration"], $row["duration"]
 );
 
-// table
+// contest table
 $text = <<<EOT
 <div class="row">
 <div class="col-md-12">
@@ -102,22 +99,20 @@ echo sprintf( $text,
 	$lang["contest"]["action"]
 );
 
-// sql
+// sql & execute
 $sql = "SELECT * FROM problems WHERE contest_id=$id";
 $result = $conn->query($sql);
+if ($result->num_rows > 0) {
 
-// execute
-if ($result->num_rows > 0)
-{
-
- // output data of each row
- while($row = $result->fetch_assoc())
- {
-	$id = $row["problem_id"];
-	$about = $row["about"];
-	$letter = strtoupper($row["letter"]);
+// print contest table
+while($row = $result->fetch_assoc()) {
 	
-// row
+// contest row	
+$id = $row["problem_id"];
+$about = $row["about"];
+$letter = strtoupper($row["letter"]);
+	
+// contest row
 $text = <<<EOT
 <tr>
 <td>$id</td>
@@ -134,23 +129,19 @@ echo sprintf( $text,
 	$lang["contest"]["question"]
 );
 
- }
-}
+}}
 
 // end table
 echo "</tbody></table></div></div>";
 
 // close
 $conn->close();
-?>
 
+// container end
+echo <<<EOT
+</div>
+<!-- /container -->
+EOT;
 
-
-</div> 
-<!-- /Основно съдържание -->
-
-
-
-<?php
-// Заключителна част на документа
+// footer
 include("footer.php");

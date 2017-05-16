@@ -19,7 +19,7 @@ $row = $result->fetch_assoc();
 // close
 $conn->close();
 
-// type (pdf,doc,docx,xls,xlsx,txt)
+// document type (pdf,doc,docx,xls,xlsx,txt)
 $ctype = "";
 switch ($ext)
 {
@@ -31,11 +31,11 @@ switch ($ext)
   default: $ctype = "application/force-download";
 }
 
-// file
+// load file
 $letter = $row["letter"];
 $file = $SETS_DIR."/".$row["set_code"]."/$letter/description.$ext";
 
-// view
+// view file
 header("Content-Type: $ctype");
 header("Content-Disposition: attachment; filename='$letter.$ext';" );
 readfile( $file );

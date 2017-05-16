@@ -1,18 +1,16 @@
 <?php
-// Текуща страница
+// current page
 $page = "submit";
 
-// Заглавна част на документа
+// header
 include("header.php");
-?>
 
-
-
-<!-- Основно съдържание -->
+// container
+echo <<<EOT
+<!-- container -->
 <div class="container">
+EOT;
 
-
-<?php
 // init
 include("init.php");
 
@@ -30,7 +28,12 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 	// check for user
 	$sql = "SELECT user_id FROM  spoj0.users WHERE name='$user' and pass_md5='$pass'";
 	$result = $conn->query($sql);
-        if ($result->num_rows == 0) echo "<div class='jumbotron alert-danger'><h1>Проблем</h1><p>Неправилно потребителско име и/или парола.<p></div>";
+    if ($result->num_rows == 0) 
+	die( sprintf("<div class='jumbotron alert-danger'><h1> %s </h1><p> %s.<p></div>",
+		$lang["submit"]["problem"],
+		$lang["submit"]["info1"]
+	));
+
 	$row = $result->fetch_row();
 	$user_id = $row[0];
 
@@ -39,12 +42,18 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 	       "VALUES ('$problem_id','$user_id','$submit_time','$language','$code','program.$language','','waiting','')";
 
 	// execute and message
-	if($conn->query($sql)) echo "<div class='jumbotron alert-success'><h1>Решение</h1><p>Успешно е изпратено решение <b>$problem_id</b> на задача.</p></div>";
-	else echo "<div class='jumbotron alert-danger'><h1>Решение</h1><p>Възникна проблем при изпращането на решение <b>$problem_id</b> на задача.</p></div>";
+	if($conn->query($sql)) 
+	echo sprintf("<div class='jumbotron alert-success'><h1> %s </h1><p> %s </p></div>",
+		$lang["submit"]["submit"],
+		$lang["submit"]["info2"]."<b>$problem_id</b>"
+	);
+	else echo sprintf("<div class='jumbotron alert-danger'><h1> %s </h1><p> %s </p></div>",
+		$lang["submit"]["submit"],
+		$lang["submit"]["info3"]."<b>$problem_id</b>"
+	);
 
 	// close
 	$conn->close();
-
 
 } else {
 // GET
@@ -52,79 +61,96 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 // problem number
 $pid = "";
 if(isset($_REQUEST["id"])) $pid = (int)$_REQUEST["id"];
-?>
 
-<!-- The Form -->
-<h1>Решение</h1>
+// The Form
+$text =  <<<EOT
+<h1>%s</h1>
 <form class="form-horizontal" action="submit.php" method="POST">
 <fieldset>
 
-<!-- Legend -->
-<!-- <legend>Решение</legend> -->
 <!-- task -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="task">Номер на задачата</label>
+  <label class="col-md-4 control-label" for="task">%s</label>
   <div class="col-md-4">
-  <input id="task" name="task" type="text" placeholder="Например: 42" class="form-control input-md" required="" value="<?php echo $pid; ?>">
+  <input id="task" name="task" type="text" placeholder="%s" class="form-control input-md" required="" value="$pid">
   </div>
 </div>
 <!-- user -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="user">Потребител</label>
+  <label class="col-md-4 control-label" for="user">%s</label>
   <div class="col-md-4">
-  <input id="user" name="user" type="text" placeholder="Например: dimitar" class="form-control input-md" required="">
+  <input id="user" name="user" type="text" placeholder="%s" class="form-control input-md" required="">
   </div>
 </div>
 <!-- pass -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="password">Парола</label>
+  <label class="col-md-4 control-label" for="password">%s</label>
   <div class="col-md-4">
-    <input id="password" name="password" type="password" placeholder="Например: minchev" class="form-control input-md" required="">
+    <input id="password" name="password" type="password" placeholder="%s" class="form-control input-md" required="">
   </div>
 </div>
 <!-- language -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="language">Език за програмиране</label>
+  <label class="col-md-4 control-label" for="language">%s</label>
   <div class="col-md-4">
-   <select class="form-control" name="language" id="language" class="form-control input-md" >
+   <select class="form-control" name="language" id="language" class="form-control input-md">
     <option selected value="cpp">C++</option>
     <option value="cs">C#</option>
     <option value="java">Java</option>
    </select>
-  </div>
+   <div id="language_note" class="alert alert-info" style="margin-top:10px">%s</div>
+  </div>  
 </div>
 <!-- code -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="code">Изходен код на програмата</label>
+  <label class="col-md-4 control-label" for="code">%s</label>
   <div class="col-md-4">
-  <textarea id="code" name="code" placeholder="Тук копирайте и поставете Вашият програмен код съдържащ решението на задачата и подлежащ на проверка." rows="10" class="form-control input-md" required=""></textarea>
+  <textarea id="code" name="code" placeholder="%s" rows="10" class="form-control input-md" required=""></textarea>
   </div>
 </div>
 <!-- Submit Button -->
 <div class="form-group">
   <label class="col-md-4 control-label" for="submit"></label>
   <div class="col-md-4">
-    <button id="submit" name="submit" class="btn btn-primary">Изпрати решението за проверка</button>
+    <button id="submit" name="submit" class="btn btn-primary">%s</button>
   </div>
 </div>
 
 </fieldset>
 </form>
+<!-- Show/Hide Java Language Note -->
+<script>
+$('#language_note').hide();
+$(function() {
+    $('#language').change(function(){
+        $('#language_note')[ ($("option[value='java']").is(":checked"))? "show" : "hide" ]();  
+    });
+});
+</script>
+EOT;
+echo sprintf( $text,  
+	$lang["submit"]["submit"], 	
+	$lang["submit"]["task_id"],
+	$lang["submit"]["task_sample"],
+	$lang["submit"]["user"], 
+	$lang["submit"]["user_sample"],
+	$lang["submit"]["password"], 
+	$lang["submit"]["password_sample"],
+	$lang["submit"]["language"], 
+	$lang["submit"]["language_note"],
+	$lang["submit"]["code"], 
+	$lang["submit"]["code_note"],
+	$lang["submit"]["submit_btn"] 
+);
 
-
-
-<?php
 }
 // END GET
-?>
 
-
-
+// container end
+echo <<<EOT
 </div>
-<!-- /Основно съдържание -->
+<!-- /container -->
+EOT;
 
-
-
-<?php
 // Заключителна част на документа
 include("footer.php");

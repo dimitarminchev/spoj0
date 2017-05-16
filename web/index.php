@@ -1,17 +1,16 @@
 <?php
-// Текуща страница
+// current page
 $page = "contests";
 
-// Заглавна част на документа
+// header
 include("header.php");
-?>
 
-
-
-<!-- Основно съдържание -->
+// container
+echo <<<EOT
+<!-- container -->
 <div class="container">
+EOT;
 
-<?php
 // welcome
 $text = <<<EOT
 <!-- Заглавна част -->
@@ -82,15 +81,12 @@ echo "</tbody></table></div></div>";
 
 // close
 $conn->close();
-?>
 
+// container end
+echo <<<EOT
+</div>
+<!-- /container -->
+EOT;
 
-
-</div> 
-<!-- /Основно съдържание -->
-
-
-
-<?php
 // Заключителна част на документа
 include("footer.php");

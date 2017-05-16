@@ -8,6 +8,7 @@ $SETS_DIR = '/home/spoj0/sets'; // where problem sets are stored
 $NEWS_DIR = '/home/spoj0/news'; // where the news are stored
 $EXPORT_DIR = '/home/spoj0/export'; // where stuff is exported
 $STOP_DAEMON_FILE = '/home/spoj0/spoj0-stop-daemon';
+$SQL_LIMIT = 200; // set sql query limit
 
 // Statuses
 $STATUS_WAITING = 'waiting';
@@ -33,5 +34,3 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 
 // Check connection
 if ($conn->connect_error) die("Error: " . $conn->connect_error);
-
-

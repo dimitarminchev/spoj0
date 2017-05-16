@@ -1,19 +1,17 @@
 <?php
-// Текуща страница
+// current page
 $page = "contests";
 
-// Заглавна част на документа
+// header
 include("header.php");
-?>
 
-
-
-<!-- Основно съдържание -->
+// container
+echo <<<EOT
+<!-- container -->
 <div class="container">
+EOT;
 
-
-<?php
-// mysql
+// initialization
 include("init.php");
 
 // contest number
@@ -98,7 +96,6 @@ echo sprintf( $text,
 	$lang["description"]["about"]
 );
 
-
 // file path
 $filepath = $SETS_DIR."/".$row["c_code"]."/".$row["letter"];
 
@@ -116,7 +113,6 @@ if(!empty($files))
 	echo "</div>";
 }
 
-
 // read and print description text file
 $source = file_get_contents("$filepath/description.txt"); // or readfile("$filepath/description.txt");
 if(!empty($source))
@@ -124,7 +120,6 @@ echo "<pre style='white-space: pre-line; font-family:courier; font-size: 16pt;'>
 
 // close
 $conn->close();
-
 
 // buttons
 $text = <<<EOT
@@ -137,16 +132,12 @@ echo sprintf( $text,
 	$lang["description"]["problems"], 
 	$lang["description"]["submit"]
 );
-?>
 
-
-
-
+// container end
+echo <<<EOT
 </div>
-<!-- /Основно съдържание -->
+<!-- /container -->
+EOT;
 
-
-
-<?php
-// Заключителна част на документа
+// footer
 include("footer.php");
