@@ -166,7 +166,7 @@ echo sprintf( $text,
 );
 
 // execute
-$sql .= $order;
+$sql .= " ORDER BY r.run_id desc LIMIT $SQL_LIMIT";
 $result = $conn->query($sql);
 
 // process
