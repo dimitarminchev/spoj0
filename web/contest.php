@@ -118,9 +118,9 @@ $text = <<<EOT
 <td>$id</td>
 <td>$letter</td>
 <td>$about</td>
-<td class='pull-right'><a href='description.php?id=$id' class='btn btn-primary' role='button'> %s </a> &nbsp;
-<a href='submit.php?id=$id' class='btn btn-info' role='button'> %s </a> &nbsp;
-<a href='askquestion.php?id=$id' class='btn btn-warning' role='button'> %s </a>
+<td class='pull-right'><a href='description.php?id=$id' class='btn btn-primary' role='button'> %s </a> 
+<a href='submit.php?id=$id' class='btn btn-info' role='button'> %s </a> 
+<a href='question-ask.php?id=$id' class='btn btn-warning' role='button'> %s </a>
 </tr>
 EOT;
 echo sprintf( $text,  

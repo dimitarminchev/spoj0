@@ -20,6 +20,8 @@ $STATUS_WA = 'wa'; // wrong answer
 $STATUS_PE = 'pe'; // presentation error (difference in whitespaces)
 $STATUS_RE = 're'; // runtime error
 
+// Google ReCaptcha Api key
+$RECAPTCHA_KEY = "6LeZxQsUAAAAANhwzMKG7AOa1oT0q7LOOd58eWoa";
 
 
 /* MySQL */

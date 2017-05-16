@@ -32,15 +32,14 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 	$conn->close();
 
 } else {
-?>
 
 
-
-
+// GET
+$text = <<< EOT
 <!-- header -->
 <div class="jumbotron">
-<h1>Регистрация</h1>
-<p>За да изпращате решения трябва да се регистрирате, като попълните настоящият електронен формуляр. Моля запомнете потребителското име и паролата си, те ще са Ви необходими.</p>
+<h1>%s</h1>
+<p>%s</p>
 </div>
 
 <!-- The Form -->
@@ -48,40 +47,40 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 <fieldset>
 
 <!-- Legend -->
-<legend>Регистрация</legend>
+<legend>%s</legend>
 <!-- name -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="name">Име и фамилия</label>
+  <label class="col-md-4 control-label" for="name">%s</label>
   <div class="col-md-4">
-  <input id="name" name="name" type="text" placeholder="Например: Димитър Минчев" class="form-control input-md" required="">
+  <input id="name" name="name" type="text" placeholder="%s" class="form-control input-md" required="">
   </div>
 </div>
 <!-- email -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="email">Електронна поща</label>
+  <label class="col-md-4 control-label" for="email">%s</label>
   <div class="col-md-4">
-  <input id="email" name="email" type="text" placeholder="Например: dimitar.minchev@gmail.com" class="form-control input-md" required="">    
+  <input id="email" name="email" type="text" placeholder="%s" class="form-control input-md" required="">    
   </div>
 </div>
 <!-- user -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="user">Потребител</label>
+  <label class="col-md-4 control-label" for="user">%s</label>
   <div class="col-md-4">
-  <input id="user" name="user" type="text" placeholder="Например: dimitar" class="form-control input-md" required="">   
+  <input id="user" name="user" type="text" placeholder="%s" class="form-control input-md" required="">   
   </div>
 </div>
 <!-- pass -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="password">Парола</label>
+  <label class="col-md-4 control-label" for="password">%s</label>
   <div class="col-md-4">
-    <input id="password" name="password" type="password" placeholder="Например: minchev" class="form-control input-md" required="">
+    <input id="password" name="password" type="password" placeholder="%s" class="form-control input-md" required="">
   </div>
 </div>
 <!-- TODO: Google Recapcha
 <div class="form-group">
 <label class="col-md-4 control-label" for="recapcha"></label>
 <div class="col-md-4">
-<div class="g-recaptcha" data-sitekey="6LeZxQsUAAAAANhwzMKG7AOa1oT0q7LOOd58eWoa"></div>
+<div class="g-recaptcha" data-sitekey="%s"></div>
 </div>
 </div>
 -->
@@ -89,16 +88,30 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 <div class="form-group">
   <label class="col-md-4 control-label" for="submit"></label>
   <div class="col-md-4">
-    <button id="submit" name="submit" class="btn btn-primary">Регистрация</button>
+    <button id="submit" name="submit" class="btn btn-primary">%s</button>
   </div>
 </div>
 
 </fieldset>
 </form>
+EOT;
+echo sprintf( $text,
+	$lang["register"]["register"], 
+	$lang["register"]["register_info"],
+	$lang["register"]["register"],
+	$lang["register"]["name"],
+	$lang["register"]["name_note"],
+	$lang["register"]["email"],
+	$lang["register"]["email_note"],
+	$lang["register"]["user"], 
+	$lang["register"]["usern_note"], 
+	$lang["register"]["password"], 
+	$lang["register"]["password_note"], 
+	$RECAPTCHA_KEY,
+	$lang["register"]["submit"]
+);
 
 
-
-<?php
 }
 // END GET
 

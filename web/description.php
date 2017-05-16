@@ -124,13 +124,15 @@ $conn->close();
 // buttons
 $text = <<<EOT
 <p>
-<a class="btn btn-primary btn-lg" href="javascript:history.back();" role="button"> %s </a>
-<a class="btn btn-info btn-lg" href="submit.php?id=$id" role="button"> %s </a>
+<a href="javascript:history.back();"class="btn btn-primary btn-lg"  role="button"> %s </a>
+<a href="submit.php?id=$id" class="btn btn-info btn-lg"  role="button"> %s </a>
+<a href='question-ask.php?id=$id' class='btn btn-warning btn-lg' role='button'> %s </a>
 </p>
 EOT;
 echo sprintf( $text, 
 	$lang["description"]["problems"], 
-	$lang["description"]["submit"]
+	$lang["description"]["submit"],
+	$lang["description"]["question"]
 );
 
 // container end
