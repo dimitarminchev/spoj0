@@ -1,18 +1,16 @@
 <?php
-// Текуща страница
+// current page
 $page = "register";
 
-// Заглавна част на документа
+// header
 include("header.php");
-?>
 
-
-
-<!-- Основно съдържание -->
+// container
+echo <<<EOT
+<!-- container -->
 <div class="container">
+EOT;
 
-
-<?php
 // init
 include("init.php");
 
@@ -28,8 +26,8 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 	$sql = "INSERT INTO spoj0.users (name, pass_md5, display_name, about) VALUES ('$user','$pass','$name','$email')";
 	$result = $conn->query($sql); 
 	// message
-	if($result) echo "<div class='jumbotron alert-success'><h1>Регистрация</h1><p>Потребителят е регистриран успешно.</p></div>";
-	else echo "<div class='jumbotron alert-danger'><h1>Регистрация</h1><p>Възникна проблем при регистрирането на потребителят.</p></div>";
+	if($result) echo sprintf( "<div class='jumbotron alert-success'><h1>%s</h1><p>%s.</p></div>", $lang["register"]["register"], $lang["register"]["info1"] );	
+	else echo sprintf( "<div class='jumbotron alert-danger'><h1>%s</h1><p>%s</p></div>", $lang["register"]["problem"], $lang["register"]["info2"] );
 	// close
 	$conn->close();
 
@@ -42,8 +40,7 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 <!-- header -->
 <div class="jumbotron">
 <h1>Регистрация</h1>
-<p>За да изпращате решения трябва да се регистрирате, като попълните настоящият електронен формуляр. 
-Моля запомнете потребителското име и паролата си, те ще са Ви необходими.</p>
+<p>За да изпращате решения трябва да се регистрирате, като попълните настоящият електронен формуляр. Моля запомнете потребителското име и паролата си, те ще са Ви необходими.</p>
 </div>
 
 <!-- The Form -->
@@ -104,15 +101,12 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 <?php
 }
 // END GET
-?>
 
-
-
+// container end
+echo <<<EOT
 </div>
-<!-- /Основно съдържание -->
+<!-- /container -->
+EOT;
 
-
-
-<?php
-// Заключителна част на документа
+// footer
 include("footer.php");

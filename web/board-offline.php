@@ -1,63 +1,74 @@
 <?php
-// Текуща страница
+// current page
 $page = "contests";
 
-// Заглавна част на документа
+// header
 include("header.php");
-?>
 
-
-
-<!-- Основно съдържание -->
+// container
+echo <<<EOT
+<!-- container -->
 <div class="container">
+EOT;
 
-
-
-<?php
 // init
 include("init.php");
 
 // contest number
-if(!isset($_REQUEST["id"])) die("<div class='jumbotron alert-danger'><h1>Проблем</h1><p>Няма посочен номер на състезание.<p></div>");
+if(!isset($_REQUEST["id"])) 
+die( sprintf("<div class='jumbotron alert-danger'><h1> %s </h1><p> %s.<p></div>",
+	$lang["board"]["problem"],
+	$lang["board"]["info1"]
+));
 $cid = (int)$_REQUEST["id"];
 
 // contest info
 $sql = "SELECT * FROM contests WHERE contest_id=$cid";
 $result = $conn->query($sql);
-if ($result->num_rows == 0) die("<div class='jumbotron alert-danger'><h1>Проблем</h1><p>Състезание с такъв номер не съществува.<p></div>");
+if ($result->num_rows == 0) die( sprintf("<div class='jumbotron alert-danger'><h1> %s </h1><p> %s.<p></div>",
+	$lang["board"]["problem"],
+	$lang["board"]["info2"]
+));
 $row = $result->fetch_assoc();
 $name = $row["name"];
 $start = new DateTime($row["start_time"]);
 $start = $start->format("d.m.Y H:i");
 $duration = $row["duration"]; 
+
 // header
-echo<<<EOT
-<h1>Класиране след състезание</h1>
+$text = <<<EOT
+<h1>%s</h1>
 <div class="row">
 <!-- 1 -->
 <div class="col-md-6">
 <div class="panel panel-default">
-<div class="panel-heading"><h3 class="panel-title">състезание</h3></div>
+<div class="panel-heading"><h3 class="panel-title">%s</h3></div>
 <div class="panel-body"><h3>$name</h3></div>
 </div>
 </div>
 <!-- 2 -->
 <div class="col-md-3">
 <div class="panel panel-default">
-<div class="panel-heading"><h3 class="panel-title">начало</h3></div>
+<div class="panel-heading"><h3 class="panel-title">%s</h3></div>
 <div class="panel-body"><h3>$start</h3></div>
 </div>
 </div>
 <!-- 3 -->
 <div class="col-md-3">
 <div class="panel panel-default">
-<div class="panel-heading"><h3 class="panel-title">продължителност</h3></div>
+<div class="panel-heading"><h3 class="panel-title">%s</h3></div>
 <div class="panel-body"><h3>$duration</h3></div>
 </div>
 </div>
 </div>
 <!-- /row -->
 EOT;
+echo sprintf( $text,  	
+	$lang["board"]["offline"],
+	$lang["board"]["contest"],
+	$lang["board"]["start"],
+	$lang["board"]["duration"]
+);
 
 // sql
 $sql =<<<EOT
@@ -159,9 +170,15 @@ $res = $res->fetch_row();
 $taskscounter = $res[0];
 
 // table
-echo "<div class='row'><div class='col-md-12'><table class='table table-striped'><thead><tr><th>№</th><th>име</th><th>решени</th><th>време</th>";
-for($i=0;$i<$taskscounter;$i++) echo "<th>".chr($i+65)."</th>";
-echo "<th class='pull-right'>опити</th></tr></thead><tbody>";
+$text = "<div class='row'><div class='col-md-12'><table class='table table-striped'><thead><tr><th>#</th><th>%s</th><th>%s</th><th>%s</th>";
+for($i=0;$i<$taskscounter;$i++) $text .= "<th>".chr($i+65)."</th>";
+$text .= "<th class='pull-right'>%s</th></tr></thead><tbody>";
+echo sprintf( $text,  	
+	$lang["board"]["user"],
+	$lang["board"]["solved"],
+	$lang["board"]["time"],
+	$lang["board"]["submits"]
+);
 
 // process table
 for ($i=0;$i<count($rate);$i++)
@@ -196,15 +213,12 @@ echo "</tbody></table></div></div>";
 
 // close
 $conn->close();
-?>
 
-
-
+// container end
+echo <<<EOT
 </div>
-<!-- /Основно съдържание -->
+<!-- /container -->
+EOT;
 
-
-
-<?php
 // Заключителна част на документа
 include("footer.php");

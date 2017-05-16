@@ -63,7 +63,7 @@ $pid = "";
 if(isset($_REQUEST["id"])) $pid = (int)$_REQUEST["id"];
 
 // The Form
-$text =  <<<EOT
+$text = <<<EOT
 <h1>%s</h1>
 <form class="form-horizontal" action="submit.php" method="POST">
 <fieldset>
