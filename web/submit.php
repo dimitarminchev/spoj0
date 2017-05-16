@@ -98,7 +98,7 @@ $text = <<<EOT
     <option value="cs">C#</option>
     <option value="java">Java</option>
    </select>
-   <div id="language_note" class="alert alert-info" style="margin-top:10px">%s</div>
+   <div id="language_note" class="alert alert-info" style="margin-top:10px; display: none;">%s</div>
   </div>  
 </div>
 <!-- code -->
@@ -119,12 +119,10 @@ $text = <<<EOT
 </fieldset>
 </form>
 <!-- Show/Hide Java Language Note -->
-<script>
-$('#language_note').hide();
-$(function() {
-    $('#language').change(function(){
-        $('#language_note')[ ($("option[value='java']").is(":checked"))? "show" : "hide" ]();  
-    });
+<script language="javascript">
+document.getElementById('language').addEventListener('change', function () {
+ var style = this.value == "java" ? 'block' : 'none';
+ document.getElementById('language_note').style.display = style;
 });
 </script>
 EOT;
