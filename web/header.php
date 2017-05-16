@@ -60,17 +60,17 @@ $url_en = $url['path']."?".http_build_query($params);
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-		    <!-- <li <?php if($page=="news") echo 'class="active"'; ?>><a href="news.php"><?php echo $lang["nav"]["news"]; ?></a></li> -->
-            <li <?php if($page=="contests") echo 'class="active"'; ?>><a href="index.php"><?php echo $lang["nav"]["contests"]; ?></a></li>
-            <li <?php if($page=="submit") echo 'class="active"'; ?>><a href="submit.php"><?php echo $lang["nav"]["submit"]; ?></a></li>
-            <li <?php if($page=="status") echo 'class="active"'; ?>><a href="status.php"><?php echo $lang["nav"]["status"]; ?></a></li>
-			<li <?php if($page=="register") echo 'class="active"'; ?>><a href="register.php"><?php echo $lang["nav"]["register"]; ?></a></li>
-			<!-- <li <?php if($page=="questions") echo 'class="active"'; ?>><a href="questions.php"><?php echo $lang["nav"]["questions"]; ?></a></li> -->
-			<li <?php if($language=="bulgarian") echo 'class="active"'; ?>><a href="<?php echo $url_bg; ?>"><img src="assets/bg.png" width="25px" /> Български</a></li>
-			<li <?php if($language=="english") echo 'class="active"'; ?>><a href="<?php echo $url_en; ?>"><img src="assets/uk.png" width="25px" /> English</a></li>
-			<li><a href="#"><?php echo date("d.m.Y H:i:s"); ?></a></li>
+		<li <?php if($page=="news") echo 'class="active"'; ?>><a href="news.php"><?php echo $lang["nav"]["news"]; ?></a></li>
+		<li <?php if($page=="contests") echo 'class="active"'; ?>><a href="index.php"><?php echo $lang["nav"]["contests"]; ?></a></li>
+		<li <?php if($page=="submit") echo 'class="active"'; ?>><a href="submit.php"><?php echo $lang["nav"]["submit"]; ?></a></li>
+		<li <?php if($page=="status") echo 'class="active"'; ?>><a href="status.php"><?php echo $lang["nav"]["status"]; ?></a></li>
+		<li <?php if($page=="register") echo 'class="active"'; ?>><a href="register.php"><?php echo $lang["nav"]["register"]; ?></a></li>
+		<li <?php if($page=="questions") echo 'class="active"'; ?>><a href="questions.php"><?php echo $lang["nav"]["questions"]; ?></a></li>
+		<li <?php if($language=="bulgarian") echo 'class="active"'; ?>><a href="<?php echo $url_bg; ?>"><img src="assets/bg.png" width="25px" /> Български</a></li>
+		<li <?php if($language=="english") echo 'class="active"'; ?>><a href="<?php echo $url_en; ?>"><img src="assets/uk.png" width="25px" /> English</a></li>
+		<li><a href="#"><?php echo date("d.m.Y H:i:s"); ?></a></li>
           </ul>
-        </div>		
+        </div>
       </div>
 </nav>
 <!-- /navigation -->
