@@ -93,7 +93,7 @@ $text = <<<EOT
 <div class="form-group">
   <label class="col-md-4 control-label" for="language">%s</label>
   <div class="col-md-4">
-   <select class="form-control" name="language" id="language" class="form-control input-md">
+   <select onchange="javascript:showDiv(this)" class="form-control" name="language" id="language" class="form-control input-md">
     <option selected value="cpp">C++</option>
     <option value="cs">C#</option>
     <option value="java">Java</option>
@@ -119,11 +119,11 @@ $text = <<<EOT
 </fieldset>
 </form>
 <!-- Show/Hide Java Language Note -->
-<script language="javascript">
-document.getElementById('language').addEventListener('change', function () {
- var style = this.value == "java" ? 'block' : 'none';
- document.getElementById('language_note').style.display = style;
-});
+<script type="text/javascript">
+function showDiv(item) {
+if(item.value == "java") document.getElementById('language_note').style.display = "block";
+else document.getElementById('language_note').style.display = "none";
+}
 </script>
 EOT;
 echo sprintf( $text,  
