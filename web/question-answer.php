@@ -60,7 +60,7 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 <!-- The Form -->
 <h1>Отговор</h1>
 <?php
-echo "<form class=\"form-horizontal\" action=\"answer.php?id=$qid\" method='POST'>";
+echo "<form class=\"form-horizontal\" action=\"question-answer.php?id=$qid\" method='POST'>";
 ?>
 <fieldset>
 
