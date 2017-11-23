@@ -4,6 +4,11 @@ Simple Programming Contests Online Judge System.
 ## Requirements
 Linux Ubuntu Server, Apache, MySQL, PHP and PERL.
 
+## Raspberry Pi
+- [Donwload Ubuntu for Raspberry Pi][1]
+- [Extract image with 7-zip][2]
+- [Burn image to SD card with Etcher][3] 
+
 ## Installation
 Log in to your Linux server, stay in your home directory and execute following lines:
 ```
@@ -19,14 +24,17 @@ sudo ./spoj0-install.sh
 
 ## Credits
 - Milo Sredkov, E-mail: <milo@milosredkov.com>
-- Dimitar Minchev, E-mail: <dimitar.minchev@gmail.com>, Blog: [minchev.eu][1]
+- Dimitar Minchev, E-mail: <dimitar.minchev@gmail.com>, Blog: [minchev.eu][4]
 - Ivo Kamenarov, E-mail: <ikk@ami.uni-ruse.bg>
 
 ## About
-- Original web interface is written on PERL by Milo Sredkov. Online Demo: [dev.bfu.bg][2]. 
-- Brand new web interface is written on PHP by Dimitar Minchev. Online Demo: [atp.bfu.bg][3].
+- Original web interface is written on PERL by Milo Sredkov. Online Demo: [dev.bfu.bg][5]. 
+- Brand new web interface is written on PHP by Dimitar Minchev. Online Demo: [atp.bfu.bg][6].
 - Contestation (Questions and Answers) by Ivo Kamenarov.
 
-[1]: http://www.minchev.eu
-[2]: http://dev.bfu.bg/spoj/
-[3]: http://atp.bfu.bg/spoj/
+[1]: https://wiki.ubuntu.com/ARM/RaspberryPi/
+[2]: http://www.7-zip.org/
+[3]: http://etcher.io/
+[4]: http://www.minchev.eu/
+[5]: http://dev.bfu.bg/spoj/
+[6]: http://atp.bfu.bg/spoj/
