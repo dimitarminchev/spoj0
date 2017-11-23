@@ -59,9 +59,10 @@ CREATE TABLE `users` (
 --
 
 LOCK TABLES `users` WRITE;
-INSERT INTO `users` VALUES (1,'milo','83e4a96aed96436c621b9809e258b309','Milo Sredkov','developer', 0);
-INSERT INTO `users` VALUES (2,'mitko','d880e4a4b8a80eb33c1c40604930b79c','Dimitar Minchev','developer', 0);
-INSERT INTO `users` VALUES (3,'test',MD5('test'),'test','test user', 0);
+INSERT INTO `users` VALUES (1,'admin',MD5('admin'),'Administrator','Administrator', 0);
+INSERT INTO `users` VALUES (2,'user',MD5('user'),'User','User', 0);
+INSERT INTO `users` VALUES (3,'milo','83e4a96aed96436c621b9809e258b309','Milo Sredkov','Developer', 0);
+INSERT INTO `users` VALUES (4,'mitko','d880e4a4b8a80eb33c1c40604930b79c','Dimitar Minchev','Developer', 0);
 UNLOCK TABLES;
 
 
