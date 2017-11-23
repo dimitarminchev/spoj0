@@ -51,7 +51,7 @@ if(isset($_REQUEST["id"])) $pid = (int)$_REQUEST["id"];
 
 <!-- The Form -->
 <h1>Въпрос</h1>
-<form class="form-horizontal" action="askquestion.php" method="POST">
+<form class="form-horizontal" action="question-ask.php" method="POST">
 <fieldset>
 
 <!-- Legend -->
