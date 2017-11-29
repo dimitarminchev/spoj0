@@ -38,6 +38,16 @@ EOT
 a2ensite spoj0.conf
 service apache2 reload
 
+# SPOJ SELF TEST
+now=$(date +"%Y-%m-%d %H:%M:00")
+cat << EOT  > /home/spoj0/sets/test/set-info.conf
+name=TEST2
+start_time=$now
+duration=60
+show_sources=1
+about=SELF TEST
+EOT
+
 # RUN AND IMPORT TEST SET
 ./spoj0-control.pl start
 ./spoj0-control.pl import-set test
