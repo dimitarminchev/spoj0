@@ -28,7 +28,8 @@ p.letter as pletter,
 c.contest_id,
 r.submit_time,
 r.language,
-r.status
+r.status,
+c.show_sources
 FROM runs as r
 INNER JOIN users as u ON r.user_id = u.user_id
 INNER JOIN problems as p ON r.problem_id = p.problem_id
@@ -60,6 +61,8 @@ $problem = strtoupper($row["pletter"])."&nbsp;<span class='label label-info'>".$
 $user = $row["uname"]."&nbsp;<span class='label label-info'>".$row["user_id"]."</span>";
 $date = (new DateTime($row["submit_time"]))->format("d.m.y H:i:s");
 $language = $row["language"];
+if($row["show_sources"] == "1") 
+$language.="&nbsp;<a target='_blank' class='btn btn-primary' href='code.php?id=".(int)$_REQUEST["id"]."'>Download</a>";
 $stat = strtoupper($row["status"]);
 switch($stat)
 {
