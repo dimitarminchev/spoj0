@@ -8,12 +8,13 @@ white="\e[1;37m"
 red="\e[1;31m"	
 
 # TERMINAL BREAK (CTRL+C)
-trap 'printf "\n${red}INSTALL TERMINATED!${nocol}\n"; exit 1' 2
+trap 'printf "\n${red}INSTALLATION TERMINATED!${nocol}\n"; exit 1' 2
 
 # QUESTION
 printf "${yellow}DO YOU WANT TO START? (yes/no) ${nocol}"
 read answer
 if [ $answer = "no" ]; then
+   printf "\n${red}INSTALLATION TERMINATED!${nocol}\n"
    exit 1 # EXIT
 fi
 
