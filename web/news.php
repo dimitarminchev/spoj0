@@ -6,11 +6,13 @@ $page = "news";
 include("header.php");
 
 // container
-echo <<<EOT
+$text <<<EOT
 <!-- container -->
 <div class="container">
-<h1>NEWS</h1>
+<h1>%s</h1>
 EOT;
+echo sprintf( $text, $lang["nav"]["news"] );
+
 
 // sql
 $sql = "SELECT * FROM news ORDER BY new_id DESC";
@@ -27,11 +29,7 @@ $text = <<< EOT
 <p>%s</p>
 <hr>
 EOT;
-echo sprintf( $text,
-	$row["topic"],
-	(new DateTime($row["new_time"]))->format("d.m.Y H:i:s"),
-	$row["content"]
-);
+echo sprintf( $text, $row["topic"], (new DateTime($row["new_time"]))->format("d.m.Y H:i:s"), $row["content"]);
 }
 
 // close
