@@ -15,8 +15,17 @@ $result = $conn->query("SELECT * FROM news ORDER BY new_id DESC");
 if ($result->num_rows > 0)
 
 // print
-while($row = $result->fetch_assoc()) 
-echo sprintf( "<h3>%s</h3><div>%s</div><p>%s</p><hr>", $row["topic"], (new DateTime($row["new_time"]))->format("d.m.Y H:i:s"), $row["content"]);
+while($row = $result->fetch_assoc()) {
+$text=<<<EOT
+<div class='row'>
+<div class='col-md-12'>
+<div class='panel panel-default'>
+<div class='panel-heading'><h3 class='panel-title'>%s</h3></div>
+<div class='panel-body'><h4>%s</h4><i>%s</i></div>
+</div>
+EOT;
+echo sprintf ( $text, $row["topic"], $row["content"], (new DateTime($row["new_time"]))->format("d.m.Y H:i:s"));
+}
 
 // close
 $conn->close();
