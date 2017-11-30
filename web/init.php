@@ -36,3 +36,6 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 
 // Check connection
 if ($conn->connect_error) die("Error: " . $conn->connect_error);
+
+// UTF8
+function cp1251utf8($input) {  return iconv("windows-1251","UTF-8", $input); }
