@@ -56,10 +56,15 @@ die( sprintf("<div class='jumbotron alert-danger'><h1> %s </h1><p> %s.<p></div>"
 ));	
 $row = $result->fetch_assoc();
 
-// status
+// status and answer
+$answer = "&nbsp;";
 $stat = strtoupper($row["status"]);
-if($stat=="ANSWERED") $stat = "label-success";
-else $stat = "label-warning";
+if($stat == "ANSWERED") $stat = "label-success";
+else 
+{
+   $stat = "label-warning";
+   $answer = "<a href='question-answer.php?id=$qid' class='btn btn-primary' role='button'>%s</a>";
+}
 
 // table row
 $text = <<<EOT
@@ -91,7 +96,7 @@ $text = <<<EOT
 <div class="col-md-6">
 <div class="panel panel-default">
 <div class="panel-heading"><h3 class="panel-title">%s</h3></div>
-<div class="panel-body"><h4><span class='label $stat'>%s</span></h4><a href='question-answer.php?id=$qid' class='btn btn-primary' role='button'>%s</a></div>
+<div class="panel-body"><h4><span class='label $stat'>%s</span></h4>$answer</div>
 </div>
 </div>
 </div>
@@ -130,8 +135,8 @@ $text = <<<EOT
 <!-- 7 -->
 <div class="col-md-6">
 <div class="panel panel-default">
-<div class="panel-heading"><h3 class="panel-title">Answer</h3></div>
-<div class="panel-body"><h4>$answer_content</h4></div>
+<div class="panel-heading"><h3 class="panel-title">%s</h3></div>
+<div class="panel-body"><h4>%s</h4></div>
 </div>
 </div>
 <!-- 8 -->
