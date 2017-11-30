@@ -16,7 +16,7 @@ if ($result->num_rows > 0)
 
 // print
 while($row = $result->fetch_assoc()) 
-echo sprintf( "<h3>%s</h3><div>%s</div><p>%s</p><hr>", $row["topic"], (new DateTime($row["new_time"]))->format("d.m.Y H:i:s"), $row["content"]);
+echo sprintf( "<h3>%s</h3><div>%s</div><p>%s</p><hr>", $row["topic"], (new DateTime($row["new_time"]))->format("d.m.Y H:i:s"), cp1251utf8($row["content"]));
 
 // close
 $conn->close();
