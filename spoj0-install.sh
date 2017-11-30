@@ -13,7 +13,7 @@ trap 'printf "\n${red}INSTALLATION TERMINATED!${nocol}\n"; exit 1' 2
 printf "${yellow}DO YOU WANT TO START? (yes/no) ${nocol}"
 read answer
 if [ $answer = "no" ]; then
-   printf "\n${red}INSTALLATION TERMINATED!${nocol}\n"
+   printf "${red}INSTALLATION TERMINATED!${nocol}\n"
    exit 1 # EXIT
 fi
 
