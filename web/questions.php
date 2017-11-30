@@ -56,10 +56,10 @@ die( sprintf("<div class='jumbotron alert-danger'><h1> %s </h1><p> %s.<p></div>"
 ));	
 $row = $result->fetch_assoc();
 
-// status and answer
-$status_label = strtoupper($row["status"]);
-if($status_label == "ANSWERED") $status_label = "label-success";
-else $status_label = "label-warning";
+// status 
+$status = strtoupper($row["status"]);
+if($status == "ANSWERED") $status = "label label-success";
+else $status = "label label-warning";
 
 // table row
 $text = <<<EOT
@@ -91,7 +91,7 @@ $text = <<<EOT
 <div class="col-md-6">
 <div class="panel panel-default">
 <div class="panel-heading"><h3 class="panel-title">%s</h3></div>
-<div class="panel-body"><h4><span class='label $status_label'>%s</span></h4></div>
+<div class="panel-body"><h4><span class="$status">%s</span></h4></div>
 </div>
 </div>
 </div>
