@@ -7,7 +7,7 @@ GRANT ALL PRIVILEGES ON spoj0.* TO 'spoj0_admin'@'localhost'
 IDENTIFIED BY 'stancho3' WITH GRANT OPTION;
 
 --
--- Table structure for table `contests`
+-- Table `contests`
 --
 
 DROP TABLE IF EXISTS `contests`;
@@ -23,7 +23,7 @@ CREATE TABLE `contests` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='User accounts (may be teams also)';
 
 --
--- Table structure for table `problems`
+-- Table `problems`
 --
 
 DROP TABLE IF EXISTS `problems`;
@@ -40,7 +40,7 @@ CREATE TABLE `problems` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Table structure for table `users`
+-- Table `users`
 --
 
 DROP TABLE IF EXISTS `users`;
@@ -54,10 +54,6 @@ CREATE TABLE `users` (
   PRIMARY KEY  (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='User accounts (may be teams also)';
 
---
--- Dumping data for table `users`
---
-
 LOCK TABLES `users` WRITE;
 INSERT INTO `users` VALUES (1,'admin',MD5('admin'),'Administrator','Administrator', 0);
 INSERT INTO `users` VALUES (2,'user',MD5('user'),'User','User', 0);
@@ -67,7 +63,7 @@ UNLOCK TABLES;
 
 
 --
--- Table structure for table `runs`
+-- Table `runs`
 --
 
 DROP TABLE IF EXISTS `runs`;
@@ -90,7 +86,7 @@ CREATE TABLE `runs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Table structure for table `news`
+-- Table `news`
 --
 
 DROP TABLE IF EXISTS `news`;
@@ -103,8 +99,14 @@ CREATE TABLE `news` (
   PRIMARY KEY  (`new_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+LOCK TABLES `news` WRITE;
+INSERT INTO `news` (`new_id`, `new_time`, `file`, `topic`, `content`) VALUES
+(1, '2013-10-01 10:00:00', '', 'Информация', 'SPOJ е електронна тренировъчна система за автоматично оценяване на задачи по програмиране, разработена от Мило Средков и налична за изтегляне в <a target="_blank" href="http://code.google.com/p/spoj0/">Google Code</a>.'),
+(2, '2016-12-23 19:30:00', '', 'Актуализация', 'Актуализираната версия на SPOJ е разработена от <a target="_blank" href="http://www.minchev.eu">Димитър Минчев</a> и е налична за изтегляне в <a target="_blank" href="https://github.com/dimitarminchev/spoj0/">GitHub</a>, повече информация за обновленията вижте <a target="_blank" href="http://www.minchev.eu/spoj-update/">тук</a>. '),
+UNLOCK TABLES;
+
 -- 
--- Table structure for table `questions` 
+-- Table  `questions` 
 -- 
 
 DROP TABLE IF EXISTS `questions`;
