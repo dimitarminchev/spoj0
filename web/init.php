@@ -23,7 +23,6 @@ $STATUS_RE = 're'; // runtime error
 // Google ReCaptcha Api key
 $RECAPTCHA_KEY = "6LeZxQsUAAAAANhwzMKG7AOa1oT0q7LOOd58eWoa";
 
-
 /* MySQL */
 // Creditentials
 $servername = "localhost";
@@ -36,3 +35,6 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 
 // Check connection
 if ($conn->connect_error) die("Error: " . $conn->connect_error);
+
+// UTF8
+$conn->set_charset("utf8");
