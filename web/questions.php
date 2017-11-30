@@ -57,14 +57,9 @@ die( sprintf("<div class='jumbotron alert-danger'><h1> %s </h1><p> %s.<p></div>"
 $row = $result->fetch_assoc();
 
 // status and answer
-$answer = "&nbsp;";
-$stat = strtoupper($row["status"]);
-if($stat == "ANSWERED") $stat = "label-success";
-else 
-{
-   $stat = "label-warning";
-   $answer = "<a href='question-answer.php?id=$qid' class='btn btn-primary' role='button'>%s</a>";
-}
+$status_label = strtoupper($row["status"]);
+if($status_label == "ANSWERED") $status_label = "label-success";
+else $status_label = "label-warning";
 
 // table row
 $text = <<<EOT
@@ -96,7 +91,7 @@ $text = <<<EOT
 <div class="col-md-6">
 <div class="panel panel-default">
 <div class="panel-heading"><h3 class="panel-title">%s</h3></div>
-<div class="panel-body"><h4><span class='label $stat'>%s</span></h4>$answer</div>
+<div class="panel-body"><h4><span class='label $status_label'>%s</span></h4></div>
 </div>
 </div>
 </div>
@@ -122,12 +117,12 @@ echo sprintf( $text,
 	$lang["questions"]["contest"], $row["ccode"], // 1. contest
 	$lang["questions"]["problem"], strtoupper($row["pletter"]), // 2. problem	
 	$lang["questions"]["user"], $row["uname"], // 3. user
-	$lang["questions"]["status"], strtoupper($row["status"]), $lang["questions"]["answer"], // 4. status	
+	$lang["questions"]["status"], strtoupper($row["status"]), // 4. status	
 	$lang["questions"]["question"], $row["content"], // 5. question
 	$lang["questions"]["date"], (new DateTime($row["question_time"]))->format("d.m.y H:i:s") // 6. date
 );
 
-// MORE?
+// ANSWERED
 if(strtoupper($row["status"])=="ANSWERED") 
 {
 $text = <<<EOT
@@ -152,8 +147,8 @@ echo sprintf( $text,
 	$lang["questions"]["answer"], $row["answer_content"], // 7. answer
 	$lang["questions"]["date"], (new DateTime($row["answer_time"]))->format("d.m.y H:i:s") // 8. date
 );
-}
-
+} 
+else echo sprintf("<a href='question-answer.php?id=$qid' class='btn btn-primary' role='button'>%s</a>", $lang["questions"]["answer"]);
 
 } else {
 // 2. multiple runs status
