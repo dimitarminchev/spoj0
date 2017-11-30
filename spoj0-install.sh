@@ -64,7 +64,7 @@ service apache2 reload
 printf "${green}SPOJ ...\n${nocol}"
 now=$(date +"%Y-%m-%d %H:%M:00")
 cat << EOT  > /home/spoj0/sets/test/set-info.conf
-name=TEST2
+name=TEST
 start_time=$now
 duration=60
 show_sources=1
