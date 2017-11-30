@@ -6,7 +6,7 @@ $page = "questions";
 include("header.php");
 
 // container
-echo <<<EOT
+$text <<<EOT
 <!-- container -->
 <div class="container">
 <h1>%s</h1>
