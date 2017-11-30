@@ -192,8 +192,8 @@ while($row = $result->fetch_assoc())
 {
 // status
 $stat = strtoupper($row["status"]);
-if($stat=="ANSWERED") $stat = "label-success";
-else $stat = "label-warning";
+if($stat == "ANSWERED") $stat = "label label-success";
+else $stat = "label label-warning";
 
 // table row
 $text = <<<EOT
@@ -203,7 +203,7 @@ $text = <<<EOT
 <td>%s</td>
 <td><span class='label label-info'>%s</span>&nbsp;%s</td>
 <td>%s</td>
-<td><span class='label $stat'>%s</span></td>
+<td><span class='$stat'>%s</span></td>
 <td class='pull-right'><a href='questions.php?id=%s' class='btn btn-primary' role='button'>%s</a></td>
 </tr>
 EOT;
