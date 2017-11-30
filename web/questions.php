@@ -63,8 +63,6 @@ else $stat = "label-warning";
 
 // table row
 $text = <<<EOT
-// print
-echo <<<EOT
 <div class="row">
 <!-- 1 -->
 <div class="col-md-6">
@@ -109,7 +107,7 @@ echo <<<EOT
 <div class="col-md-6">
 <div class="panel panel-default">
 <div class="panel-heading"><h3 class="panel-title">%s</h3></div>
-<div class="panel-body"><h4>$date</h4></div>
+<div class="panel-body"><h4>%s</h4></div>
 </div>
 </div>
 </div>
