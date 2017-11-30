@@ -26,6 +26,7 @@ apt-get install php php-mcrypt php-mysql apache2 libapache2-mod-php libapache2-m
 printf "${green}CREATE USERS ...\n${nocol}"
 useradd --create-home --password spoj0 spoj0
 useradd --create-home --password spoj0run spoj0run
+printf "DONE.\n"
 
 # GET FROM REPO
 printf "${green}GET FROM REPO ...\n${nocol}"
@@ -42,7 +43,7 @@ chmod 755 *.sh
 
 # MYSQL
 printf "${green}MYSQL ...\n${nocol}"
-printf "${yellow}ENTER MYSQL ROOT USER PASSWORD:  ${nocol}"
+printf "${yellow}ENTER MYSQL ROOT USER PASSWORD\n${nocol}"
 mysql -u root -p < spoj0.sql
 
 # APACHE
