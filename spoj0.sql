@@ -61,7 +61,6 @@ INSERT INTO `users` VALUES (3,'milo','83e4a96aed96436c621b9809e258b309','Milo Sr
 INSERT INTO `users` VALUES (4,'mitko','d880e4a4b8a80eb33c1c40604930b79c','Dimitar Minchev','Developer', 0);
 UNLOCK TABLES;
 
-
 --
 -- Table `runs`
 --
@@ -102,7 +101,7 @@ CREATE TABLE `news` (
 LOCK TABLES `news` WRITE;
 INSERT INTO `news` (`new_id`, `new_time`, `file`, `topic`, `content`) VALUES
 (1, '2013-10-01 10:00:00', '', 'Информация', 'SPOJ е електронна тренировъчна система за автоматично оценяване на задачи по програмиране, разработена от Мило Средков и налична за изтегляне в <a target="_blank" href="http://code.google.com/p/spoj0/">Google Code</a>.'),
-(2, '2016-12-23 19:30:00', '', 'Актуализация', 'Актуализираната версия на SPOJ е разработена от <a target="_blank" href="http://www.minchev.eu">Димитър Минчев</a> и е налична за изтегляне в <a target="_blank" href="https://github.com/dimitarminchev/spoj0/">GitHub</a>, повече информация за обновленията вижте <a target="_blank" href="http://www.minchev.eu/spoj-update/">тук</a>. '),
+(2, '2016-12-23 19:30:00', '', 'Актуализация', 'Актуализираната версия на SPOJ е разработена от <a target="_blank" href="http://www.minchev.eu">Димитър Минчев</a> и е налична за изтегляне в <a target="_blank" href="https://github.com/dimitarminchev/spoj0/">GitHub</a>, повече информация за обновленията вижте <a target="_blank" href="http://www.minchev.eu/spoj-update/">тук</a>. ');
 UNLOCK TABLES;
 
 -- 
