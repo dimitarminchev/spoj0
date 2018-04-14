@@ -2,15 +2,12 @@
 use strict;
 use Time::localtime;
 use DBI;
-
 # spoj0 lib
 use lib '/home/spoj0';
 use spoj0;
-
-#usage - ./spoj0-control.pl <command> [<args>...]
-
 my $spoj_dir = $HOME_DIR;
 
+#usage - ./spoj0-control.pl <command> [<args>...]
 sub Usage{
 	die qq(
 Usage:
@@ -44,18 +41,13 @@ Usage:
 }
 
 my $cmd = shift @ARGV;
-
 my $dbh = SqlConnect;
-
 my $stop_file = $STOP_DAEMON_FILE;
 my $run_tag = 'spojdm';
-
 
 if($cmd eq 'start'){
 	System "rm $stop_file";
 	System "start-stop-daemon --start --pidfile /var/run/spoj0.pid -b --exec $spoj_dir/spoj0-daemon.pl";
-	
-	
 	#System "launchtool --log-launchtool-output=file:launchtool.log --log-launchtool-errors=file:launchtool.err "
 	#	." --debug --tag=$run_tag --no-pidfile -d './spoj-daemon.pl-b >daemon.log 2>daemon.err'";
 	
@@ -63,7 +55,6 @@ if($cmd eq 'start'){
 elsif($cmd eq 'start-here'){
 	System "rm $stop_file";
 	System "./spoj0-daemon.pl";
-	
 	#System "launchtool --log-launchtool-output=file:launchtool.log --log-launchtool-errors=file:launchtool.err "
 	#	." --debug --tag=$run_tag --no-pidfile -d './spoj-daemon.pl-b >daemon.log 2>daemon.err'";
 	
@@ -145,10 +136,8 @@ sub SyncNews{
 }
 
 sub ImportSet{
-
 	my $set_code = shift or die "pass the set code as argument";
 	my $tm = localtime;
-	
 	my %set_data = (
 		'set_code' => $set_code,
 		'name' => "Unnamed",
@@ -157,20 +146,13 @@ sub ImportSet{
 		'show_sources' => '1',
 		'about' => ''
 	);
-	
 	my %problems = ();
-	
 	my $set_name = "Unnamed";
-	
 	ParseConf "$SETS_DIR/$set_code/set-info.conf", \%set_data;
-	
 	SqlInsert \$dbh, 'contests', \%set_data;
-	
 	my $contest_id = $dbh->last_insert_id(undef, 'spoj0', 'contests', 'contest_id');
 	print "contest_id: $contest_id\n";
-	
 	my @pls = DirFiles "$SETS_DIR/$set_code";
-	
 	my $pl; #problem letter
 	foreach my $pl(@pls){
 		#warn $pl;
@@ -215,10 +197,8 @@ sub ImportSet{
 }
 
 sub SyncSet{
-
 	my $set_code = shift or die "pass the set code as argument";
 	my $tm = localtime;
-	
 	my %set_data = (
 		'set_code' => $set_code,
 		'name' => "Unnamed",
@@ -227,21 +207,13 @@ sub SyncSet{
 		'show_sources' => '1',
 		'about' => ''
 	);
-	
 	my %problems = ();
-	
 	my $set_name = "Unnamed";
-	
 	ParseConf "$SETS_DIR/$set_code/set-info.conf", \%set_data;
-	
 	SqlSync $dbh, 'contests', \%set_data, ['set_code'];
-	
-	
 	my $contest_id = (GetContestsEx $dbh, {'set_code'=>$set_code})->[0]->{'contest_id'};
 	print "contest_id: $contest_id\n";
-	
 	my @pls = DirFiles "$SETS_DIR/$set_code";
-	
 	my $pl; #problem letter
 	foreach my $pl(@pls){
 		#warn $pl;
@@ -273,9 +245,7 @@ sub SyncSet{
 	foreach my $letter(sort keys %problems){
 		SqlSync $dbh, 'problems', $problems{$letter}, ['contest_id', 'letter'];
 		my $problem_id = (GetProblemsEx $dbh, {'contest_id'=>$contest_id, 'letter'=>$letter})->[0]->{'problem_id'};
-
 		print "problem_id: $problem_id for: $letter\n";
-		
 		my $prob_dir = "$SETS_DIR/$set_code/$letter";
 		my @prob_files = DirFiles "$prob_dir/";
 		foreach my $pf(@prob_files){
@@ -284,12 +254,9 @@ sub SyncSet{
 			}
 		}
 	}
-	
 }
 
-
 sub SubmitRun{
-	
 	my $problem_id = shift or die;
 	my $user_id = shift or die;
 	my $source_fn = shift or die;
@@ -302,8 +269,6 @@ sub SubmitRun{
 	$language or $language = $source_ext;
 	$about or $about = $source_name;
 	my $source_code = ReadFile($source_fn);
-	
-	
 	my %run_data = (
 		'problem_id' => $problem_id,
 		'user_id' => $user_id,
@@ -315,17 +280,10 @@ sub SubmitRun{
 		'status' => 'waiting',
 		'log' => ''
 	);
-	
-	
 	my $dbh = SqlConnect;
-	
 	$dbh or die "Unable to connect to database!";
-	
-	
 	SqlInsert \$dbh, 'runs', \%run_data;
 	print "run_id: ", $dbh->last_insert_id(undef, 'spoj0', 'runs', 'run_id'), "\n";
-	
-
 }
 
 sub PlagExport{
@@ -349,7 +307,6 @@ sub PlagExport{
 		my $fn = "$dir/u$user_id-r$run_id.$ext";
 		WriteFile($fn, $code);
 		print "Wrote $fn\n";
-		
 	}
 	$run_st->finish;
 }
