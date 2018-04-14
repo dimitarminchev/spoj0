@@ -1,8 +1,9 @@
 #!/usr/bin/perl
-
-use lib "/home/spoj0/";
 use strict;
 use DBI;
+
+# spoj0 lib
+use lib '/home/spoj0';
 use spoj0;
 
 chdir $HOME_DIR;
@@ -11,7 +12,6 @@ open STDOUT, '>>daemon.log';
 close STDERR;
 open STERR, '>>daemon.err';
 
-
 my $now = SqlNow();
 print STDOUT "= deamon run $now =\n";
 print STDERR "= deamon run $now =\n";
@@ -19,12 +19,10 @@ print STDERR "= deamon run $now =\n";
 my $pid = getppid;
 System "echo '$pid' > /var/run/spoj0.pid";
 
-
 my $dbh = SqlConnect;
 
 my $WAITING = 'waiting';
 my $OK = 'ok';
-
 
 my $stop_file = $STOP_DAEMON_FILE;
 
@@ -35,7 +33,6 @@ sub Grade{
 	return (System "perl spoj0-grade.pl $run_id >$EXEC_DIR/grade.log 2>$EXEC_DIR/grade.err") == 0;
 	
 }
-
 
 print "Beware.... spoj0-deamon running!";
 
