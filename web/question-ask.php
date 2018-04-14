@@ -1,6 +1,6 @@
 <?php
 // current page
-$page = "questions";
+$page = "ask";
 
 // header
 include("header.php");
@@ -24,17 +24,27 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 	// check for user
 	$sql = "SELECT user_id FROM  spoj0.users WHERE name='$user' and pass_md5='$pass'";
 	$result = $conn->query($sql);
-    if ($result->num_rows == 0) die("<div class='jumbotron alert-danger'><h1>Проблем</h1><p>Неправилно потребителско име и/или парола.<p></div>");
+    if ($result->num_rows == 0) 
+	die( sprintf("<div class='jumbotron alert-danger'><h1> %s </h1><p> %s.<p></div>",
+		$lang["ask"]["problem"],
+		$lang["ask"]["info1"]
+	));
 	$row = $result->fetch_row();
 	$user_id = $row[0];
 
 	// prepare sql
-	$sql = "INSERT INTO spoj0.questions (problem_id, user_id, question_time, content, status, answer_time, answer_content) ".
-	       "VALUES ('$problem_id','$user_id','$submit_time','$question','not answered','$submit_time','')";
+	$sql = "INSERT INTO spoj0.questions (problem_id, user_id, question_time, content, status, answer_time, answer_content) VALUES ('$problem_id','$user_id','$submit_time','$question','not answered','$submit_time','')";
 
 	// execute and message
-	if($conn->query($sql)) echo "<div class='jumbotron alert-success'><h1>Въпрос</h1><p>Успешно е изпратено въпрос на задача <b>$problem_id</b>.</p></div>";
-	else echo "<div class='jumbotron alert-danger'><h1>Въпрос</h1><p>Възникна проблем при изпращането на въпрос на задача <b>$problem_id</b>.</p></div>";
+	if($conn->query($sql)) 
+	echo sprintf("<div class='jumbotron alert-success'><h1> %s </h1><p> %s </p></div>",
+		$lang["ask"]["question"],
+		$lang["ask"]["info2"]."<b>$problem_id</b>"
+	);
+	else die( sprintf("<div class='jumbotron alert-danger'><h1> %s </h1><p> %s.<p></div>",
+		$lang["ask"]["problem"],
+		$lang["ask"]["info3"]
+	));
 
 	// close
 	$conn->close();
@@ -47,55 +57,65 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 $pid = "";
 if(isset($_REQUEST["id"])) $pid = (int)$_REQUEST["id"];
 
-?>
 
-<!-- The Form -->
-<h1>Въпрос</h1>
+// The Form
+$text = <<<EOT
+<h1>%s</h1>
 <form class="form-horizontal" action="question-ask.php" method="POST">
 <fieldset>
-
-<!-- Legend -->
-<!-- <legend>Въпрос</legend> -->
 <!-- task -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="task">Номер на задачата</label>
+  <label class="col-md-4 control-label" for="task">%s</label>
   <div class="col-md-4">
-  <input id="task" name="task" type="text" placeholder="Например: 42" class="form-control input-md" required="" value="<?php echo $pid; ?>">
+  <input id="task" name="task" type="text" placeholder="%s" class="form-control input-md" required="" value="$pid">
   </div>
 </div>
 <!-- user -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="user">Потребител</label>
+  <label class="col-md-4 control-label" for="user">%s</label>
   <div class="col-md-4">
-  <input id="user" name="user" type="text" placeholder="Например: ivan" class="form-control input-md" required="">
+  <input id="user" name="user" type="text" placeholder="%s" class="form-control input-md" required="">
   </div>
 </div>
 <!-- pass -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="password">Парола</label>
+  <label class="col-md-4 control-label" for="password">%s</label>
   <div class="col-md-4">
-    <input id="password" name="password" type="password" placeholder="Например: password" class="form-control input-md" required="">
+    <input id="password" name="password" type="password" placeholder="%s" class="form-control input-md" required="">
   </div>
 </div>
 <!-- content -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="question">Въпрос</label>
+  <label class="col-md-4 control-label" for="question">%s</label>
   <div class="col-md-4">
-  <textarea id="question" name="question" placeholder="Тук задайте въпроса." rows="10" class="form-control input-md" required=""></textarea>
+  <textarea id="question" name="question" placeholder="%s" rows="10" class="form-control input-md" required=""></textarea>
   </div>
 </div>
 <!-- Submit Button -->
 <div class="form-group">
   <label class="col-md-4 control-label" for="submit"></label>
   <div class="col-md-4">
-    <button id="submit" name="submit" class="btn btn-primary">Изпрати въпрос</button>
+    <button id="submit" name="submit" class="btn btn-primary">%s</button>
   </div>
 </div>
 
 </fieldset>
 </form>
+EOT;
+echo sprintf( $text, 
+	$lang["ask"]["question"],
+	$lang["ask"]["task_id"],
+	$lang["ask"]["task_sample"],
+	$lang["ask"]["user"],
+	$lang["ask"]["user_sample"],
+	$lang["ask"]["password"],
+	$lang["ask"]["password_sample"],
+	$lang["ask"]["question"],
+	$lang["ask"]["question_note"],
+	$lang["ask"]["submit_btn"],
+);
 
-<?php
+
 }
 // END GET
 
