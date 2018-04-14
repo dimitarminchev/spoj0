@@ -4,7 +4,6 @@ Simple Programming Contests Online Judge System.
 ## Ubuntu 17.10 Installation
 - Download and Install [Ubuntu 17.10.1 Server (32-bit)][1]
 - Enable **LAMP** and **OpenSSH** during installation
-![Ubuntu 17.10](ubuntu_17.10.png)
 - Log in and execute following lines:
 ```
 git clone https://github.com/dimitarminchev/spoj0.git
