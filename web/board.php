@@ -5,20 +5,14 @@ $page = "contests";
 // header
 include("header.php");
 
+// refresh
+header("refresh: 5;");
+
 // container
 echo <<<EOT
 <!-- container -->
 <div class="container">
 EOT;
-
-// init
-include("init.php");
-
-// NEW: refresh
-header("refresh: 5;");
-
-// init
-include("init.php");
 
 // contest number
 if(!isset($_REQUEST["id"])) 
