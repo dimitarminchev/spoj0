@@ -62,7 +62,7 @@ service apache2 reload
 
 # SPOJ 
 printf "${green}SPOJ ...\n${nocol}"
-now=$(date +"%Y-%m-%d %H:%M:00")
+now=$(date +"%Y-%m-%d %H:00:00")
 cat << EOT  > /home/spoj0/sets/test/set-info.conf
 name=TEST
 start_time=$now
