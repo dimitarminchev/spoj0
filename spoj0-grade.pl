@@ -1,7 +1,9 @@
 #!/usr/bin/perl
-
 use strict;
 use DBI;
+
+# spoj0 lib
+use lib '/home/spoj0';
 use spoj0;
 
 # Should be invoked with a signle agrument - the run_id
