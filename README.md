@@ -20,10 +20,10 @@ Step 4. Enjoy!
 - [Extract image with 7-zip][3]
 - [Burn image to SD card with Etcher][4] 
 
-## Ubuntu 16.04 Compilers
-- g++ 6.2
-- javac 1.8
-- Mono C# 4.2
+## Ubuntu 17.10 Compilers
+- g++ 7.2.0
+- javac 1.8.0_162
+- mono 4.6.2
 
 ## Credits
 - Milo Sredkov, E-mail: <milo@milosredkov.com>
