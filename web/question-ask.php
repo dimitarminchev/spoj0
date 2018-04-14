@@ -24,7 +24,7 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 	// check for user
 	$sql = "SELECT user_id FROM  spoj0.users WHERE name='$user' and pass_md5='$pass'";
 	$result = $conn->query($sql);
-    if ($result->num_rows == 0) 
+        if ($result->num_rows == 0) 
 	die( sprintf("<div class='jumbotron alert-danger'><h1> %s </h1><p> %s.<p></div>",
 		$lang["ask"]["problem"],
 		$lang["ask"]["info1"]
@@ -112,13 +112,11 @@ echo sprintf( $text,
 	$lang["ask"]["password_sample"],
 	$lang["ask"]["question"],
 	$lang["ask"]["question_note"],
-	$lang["ask"]["submit_btn"],
+	$lang["ask"]["submit_btn"]
 );
-
 
 }
 // END GET
-
 
 // container end
 echo <<<EOT
