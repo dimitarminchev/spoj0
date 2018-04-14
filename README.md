@@ -10,7 +10,6 @@ git clone https://github.com/dimitarminchev/spoj0.git
 cd spoj0
 sudo ./spoj0-install.sh
 ```
-- Enjoy!
 
 ### Ubuntu 17.10 Compilers
 - g++ 7.2.0
@@ -27,7 +26,6 @@ git clone https://github.com/dimitarminchev/spoj0.git
 cd spoj0
 sudo ./spoj0-install.sh
 ```
-- Enjoy!
 
 ## Credits
 - Milo Sredkov, E-mail: <milo@milosredkov.com>
