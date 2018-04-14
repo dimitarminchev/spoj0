@@ -1,8 +1,9 @@
 #!/usr/bin/perl
-
 use strict;
 use Time::localtime;
 use DBI;
+# spoj0 lib
+use lib '/home/spoj0';
 use spoj0;
 
 #usage - ./spoj0-control.pl <command> [<args>...]
