@@ -5,7 +5,7 @@ Simple Programming Contests Online Judge System.
 Step 1. Download and Install [Ubuntu 17.10.1 Server (32-bit)][1]
 
 Step 2. Enable **LAMP** and **OpenSSH** during installation
-!(ubuntu server 17.10.png)
+![Ubuntu 17.10](ubuntu_17.10.png)
 
 Step 3. Log in and execute following lines:
 ```
