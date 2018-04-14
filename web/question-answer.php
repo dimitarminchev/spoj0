@@ -29,7 +29,7 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 	// check for user -----
 	$sql = "SELECT user_id FROM spoj0.users WHERE name='$user' and pass_md5='$pass'";
 	$result = $conn->query($sql);
-    if ($result->num_rows == 0) 
+        if ($result->num_rows == 0) 
 	die( sprintf("<div class='jumbotron alert-danger'><h1> %s </h1><p> %s.<p></div>",
 		$lang["answer"]["problem"],
 		$lang["answer"]["info1"]
@@ -67,9 +67,10 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 // mysql
 $sql = "SELECT content FROM questions WHERE question_id=$qid";
 $result = $conn->query($sql);
-if ($result->num_rows == 0) else die( sprintf("<div class='jumbotron alert-danger'><h1> %s </h1><p> %s.<p></div>",
-		$lang["answer"]["problem"],
-		$lang["answer"]["info5"]
+if ($result->num_rows == 0) 
+die( sprintf("<div class='jumbotron alert-danger'><h1> %s </h1><p> %s.<p></div>",
+     $lang["answer"]["problem"],
+     $lang["answer"]["info5"]
 ));
 $row = $result->fetch_row();
 $content = $row[0];
@@ -129,7 +130,7 @@ echo sprintf( $text,
 	$lang["answer"]["password_sample"],
 	$lang["answer"]["answer"],
 	$lang["answer"]["answer_note"],
-	$lang["answer"]["submit_btn"],
+	$lang["answer"]["submit_btn"]
 );
 
 }
