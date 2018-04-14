@@ -1,7 +1,6 @@
 #!/usr/bin/perl
 use strict;
 use DBI;
-
 # spoj0 lib
 use lib '/home/spoj0';
 use spoj0;
@@ -117,10 +116,8 @@ sub Run{
 		$status = 'ie';
 		warn "can not find $set_ans\n";
 	}
-	
 	my $run_in = "$EXEC_DIR/test.in";
 	my $run_out = "$EXEC_DIR/test.out";
-	
 	if($status eq 'ok'){ 
 		# Run
 		chdir($EXEC_DIR);
