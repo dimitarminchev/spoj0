@@ -1,7 +1,7 @@
 # SPOJ
 Simple Programming Contests Online Judge System.
 
-## Installation
+## Ubuntu 17.10 Installation
 Step 1. Download and Install [Ubuntu 17.10.1 Server (32-bit)][1]
 
 Step 2. Enable **LAMP** and **OpenSSH** during installation
@@ -15,15 +15,15 @@ sudo ./spoj0-install.sh
 ```
 Step 4. Enjoy!
 
-## Spoj on Raspberry Pi
-- [Donwload Ubuntu for Raspberry Pi][2]
-- [Extract image with 7-zip][3]
-- [Burn image to SD card with Etcher][4] 
-
 ## Ubuntu 17.10 Compilers
 - g++ 7.2.0
 - javac 1.8.0_162
 - mono 4.6.2
+
+## Spoj on Raspberry Pi
+- [Donwload Ubuntu for Raspberry Pi][2]
+- [Extract image with 7-zip][3]
+- [Burn image to SD card with Etcher][4] 
 
 ## Credits
 - Milo Sredkov, E-mail: <milo@milosredkov.com>
