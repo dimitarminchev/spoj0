@@ -2,28 +2,33 @@
 Simple Programming Contests Online Judge System.
 
 ## Ubuntu 17.10 Installation
-Step 1. Download and Install [Ubuntu 17.10.1 Server (32-bit)][1]
-
-Step 2. Enable **LAMP** and **OpenSSH** during installation
+- Download and Install [Ubuntu 17.10.1 Server (32-bit)][1]
+- Enable **LAMP** and **OpenSSH** during installation
 ![Ubuntu 17.10](ubuntu_17.10.png)
-
-Step 3. Log in and execute following lines:
+- Log in and execute following lines:
 ```
 git clone https://github.com/dimitarminchev/spoj0.git
 cd spoj0
 sudo ./spoj0-install.sh
 ```
-Step 4. Enjoy!
+- Enjoy!
 
-## Ubuntu 17.10 Compilers
+### Ubuntu 17.10 Compilers
 - g++ 7.2.0
 - javac 1.8.0_162
 - mono 4.6.2
 
-## Spoj on Raspberry Pi
+### Raspberry Pi Installation
 - [Donwload Ubuntu for Raspberry Pi][2]
 - [Extract image with 7-zip][3]
 - [Burn image to SD card with Etcher][4] 
+- Log in and execute following lines:
+```
+git clone https://github.com/dimitarminchev/spoj0.git
+cd spoj0
+sudo ./spoj0-install.sh
+```
+- Enjoy!
 
 ## Credits
 - Milo Sredkov, E-mail: <milo@milosredkov.com>
