@@ -1,6 +1,6 @@
 <?php
 // current page
-$page = "questions";
+$page = "answer";
 
 // header
 include("header.php");
@@ -27,20 +27,35 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 	$submit_time = date("Y-m-d H:i:s");
 
 	// check for user -----
-	$sql = "SELECT user_id FROM  spoj0.users WHERE name='$user' and pass_md5='$pass'";
+	$sql = "SELECT user_id FROM spoj0.users WHERE name='$user' and pass_md5='$pass'";
 	$result = $conn->query($sql);
-    if ($result->num_rows == 0) die("<div class='jumbotron alert-danger'><h1>Проблем</h1><p>Неправилно потребителско име и/или парола.<p></div>");
+    if ($result->num_rows == 0) 
+	die( sprintf("<div class='jumbotron alert-danger'><h1> %s </h1><p> %s.<p></div>",
+		$lang["answer"]["problem"],
+		$lang["answer"]["info1"]
+	));
 	$row = $result->fetch_row();
 	$user_id = $row[0];
 	
-	if ($user_id != 1) die("<div class='jumbotron alert-danger'><h1>Проблем</h1><p>Нямате права да отговаряте на въпроси.<p></div>");
+	if ($user_id != 1) 
+	die( sprintf("<div class='jumbotron alert-danger'><h1> %s </h1><p> %s.<p></div>",
+		$lang["answer"]["problem"],
+		$lang["answer"]["info2"]
+	));
 
 	// prepare sql
 	$sql = "update spoj0.questions SET status = 'answered', answer_content='$answer', answer_time='$submit_time' where question_id=$qid";
 	
 	// execute and message
-	if($conn->query($sql)) echo "<div class='jumbotron alert-success'><h1>Въпрос</h1><p>Успешно е отговорихте на въпрос на задача <b>$problem_id</b>.</p></div>";
-	else echo "<div class='jumbotron alert-danger'><h1>Въпрос</h1><p>Възникна проблем при изпращането на отговор на въпрос на задача <b>$problem_id</b>.</p></div>";
+	if($conn->query($sql)) 
+	echo sprintf("<div class='jumbotron alert-success'><h1> %s </h1><p> %s </p></div>",
+		$lang["answer"]["answer"],
+		$lang["answer"]["info3"]."<b>$problem_id</b>"
+	);
+	else die( sprintf("<div class='jumbotron alert-danger'><h1> %s </h1><p> %s.<p></div>",
+		$lang["answer"]["problem"],
+		$lang["answer"]["info4"]
+	));
 
 	// close
 	$conn->close();
@@ -49,67 +64,74 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 } else {
 // GET
 
-	$sql = "SELECT content FROM questions WHERE question_id=$qid";
-	$result = $conn->query($sql);
-    if ($result->num_rows == 0) die("<div class='jumbotron alert-danger'><h1>Проблем</h1><p>Въпрос с такъв номер на съществува.<p></div>");
-	$row = $result->fetch_row();
-	$content = $row[0];
+// mysql
+$sql = "SELECT content FROM questions WHERE question_id=$qid";
+$result = $conn->query($sql);
+if ($result->num_rows == 0) else die( sprintf("<div class='jumbotron alert-danger'><h1> %s </h1><p> %s.<p></div>",
+		$lang["answer"]["problem"],
+		$lang["answer"]["info5"]
+));
+$row = $result->fetch_row();
+$content = $row[0];
 
-?>
 
-<!-- The Form -->
-<h1>Отговор</h1>
-<?php
-echo "<form class=\"form-horizontal\" action=\"question-answer.php?id=$qid\" method='POST'>";
-?>
+
+// The Form
+$text = <<<EOT
+<h1>%s</h1>
+<form class="form-horizontal" action="question-answer.php?id=$qid" method="POST">
 <fieldset>
-
-<!-- Legend -->
-<!-- <legend>Отговор</legend> -->
-<!-- user -->
+<!-- question -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="user">Въпрос</label>
+  <label class="col-md-4 control-label" for="user">%s</label>
   <div class="col-md-4">
-  <textarea id="answer" name="answer" rows="10" class="form-control input-md" readonly>
-  <?php 
-	echo $content;
-  ?>
-  </textarea>
+  <textarea id="answer" name="answer" rows="10" class="form-control input-md" readonly> $content </textarea>
   </div>
 </div>
 <!-- user -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="user">Потребител</label>
+  <label class="col-md-4 control-label" for="user">%s</label>
   <div class="col-md-4">
-  <input id="user" name="user" type="text" placeholder="Например: ivan" class="form-control input-md" required="">
+  <input id="user" name="user" type="text" placeholder="%s" class="form-control input-md" required="">
   </div>
 </div>
 <!-- pass -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="password">Парола</label>
+  <label class="col-md-4 control-label" for="password">%s</label>
   <div class="col-md-4">
-    <input id="password" name="password" type="password" placeholder="Например: password" class="form-control input-md" required="">
+    <input id="password" name="password" type="password" placeholder="%s" class="form-control input-md" required="">
   </div>
 </div>
 <!-- content -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="answer">Отговор</label>
+  <label class="col-md-4 control-label" for="answer">%s</label>
   <div class="col-md-4">
-  <textarea id="answer" name="answer" placeholder="Тук напишете отговор." rows="10" class="form-control input-md" required=""></textarea>
+  <textarea id="answer" name="answer" placeholder="%s" rows="10" class="form-control input-md" required=""></textarea>
   </div>
 </div>
 <!-- Submit Button -->
 <div class="form-group">
   <label class="col-md-4 control-label" for="submit"></label>
   <div class="col-md-4">
-    <button id="submit" name="submit" class="btn btn-primary">Изпрати отговор</button>
+    <button id="submit" name="submit" class="btn btn-primary">%s</button>
   </div>
 </div>
 
 </fieldset>
 </form>
-<p><u>Бележка</u>: Само администратор може да отговаря на въпроси.</p>
-<?php
+EOT;
+echo sprintf( $text, 
+	$lang["answer"]["answer"],
+	$lang["answer"]["question"],
+	$lang["answer"]["user"],
+	$lang["answer"]["user_sample"],
+	$lang["answer"]["password"],
+	$lang["answer"]["password_sample"],
+	$lang["answer"]["answer"],
+	$lang["answer"]["answer_note"],
+	$lang["answer"]["submit_btn"],
+);
+
 }
 // END GET
 
