@@ -5,6 +5,9 @@ $page = "questions";
 // header
 include("header.php");
 
+// refresh
+header("refresh: 5;");
+
 // container
 $text=<<<EOT
 <!-- container -->
