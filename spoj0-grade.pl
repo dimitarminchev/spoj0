@@ -130,7 +130,8 @@ sub Run{
 		++$time if $lang eq 'java';
 		
 		# Timeout time	
-		my $gross_time = 3*$time; 		
+		my $gross_time = $time; 
+		# my $gross_time = 3*$time; 		
 		my $exec = '';
 
 		# Languages
