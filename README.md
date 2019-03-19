@@ -33,8 +33,8 @@ sudo ./spoj0-install.sh
 - Ivo Kamenarov, E-mail: <ikk@ami.uni-ruse.bg>
 
 ## About
-- Original web interface is written on PERL by Milo Sredkov. Online Demo: [dev.bfu.bg][6]. 
-- Brand new web interface is written on PHP by Dimitar Minchev. Online Demo: [atp.bfu.bg][7].
+- Original web interface is written on PERL by Milo Sredkov.  
+- Brand new web interface is written on PHP by Dimitar Minchev. 
 - Contestation (Questions and Answers) by Ivo Kamenarov.
 
 [1]: https://www.ubuntu.com/download/alternative-downloads/
@@ -42,5 +42,3 @@ sudo ./spoj0-install.sh
 [3]: http://www.7-zip.org/
 [4]: http://etcher.io/
 [5]: http://www.minchev.eu/
-[6]: http://dev.bfu.bg/spoj/
-[7]: http://atp.bfu.bg/spoj/
