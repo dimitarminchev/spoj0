@@ -9,10 +9,16 @@ git clone https://github.com/dimitarminchev/spoj0.git
 cd spoj0
 sudo ./spoj0-install.sh
 ```
+## LAMP
+- ubuntu 18.04.02 
+- apache 2.4.29
+- mysql 5.7.26
+- php 7.2.17
+
 ## Compilers
-- g++ 7.2.0
-- javac 1.8.0_162
-- mono 4.6.2
+- gcc 7.4.0 
+- javac 11.0.2
+- mono 4.6.2.0
 
 ## Credits
 - Milo Sredkov, E-mail: <milo@milosredkov.com>
