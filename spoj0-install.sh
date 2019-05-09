@@ -20,7 +20,27 @@ fi
 # INSTALL PACKAGES
 printf "${green}INSTALL PACKAGES ...\n${nocol}"
 apt-get update
-apt-get install php php-mcrypt php-mysql apache2 libapache2-mod-php libapache2-mod-perl2 mysql-server mysql-client libdbi-perl libdbd-mysql-perl launchtool default-jdk g++ mono-mcs --fix-missing
+# apt-get install php php-mcrypt php-mysql apache2 libapache2-mod-php libapache2-mod-perl2 mysql-server mysql-client libdbi-perl libdbd-mysql-perl launchtool default-jdk g++ mono-mcs --fix-missing
+apt-get install apache2
+apt-get install php 
+apt-get install php-dev 
+apt-get install php-pear
+apt-get install php-mysql
+apt-get install libmcrypt-dev 
+apt-get install libapache2-mod-php 
+apt-get install libapache2-mod-perl2 
+apt-get install mysql-server 
+apt-get install mysql-client 
+apt-get install libdbi-perl
+apt-get install libdbd-mysql-perl 
+apt-get install launchtool 
+apt-get install default-jdk 
+apt-get install g++ 
+apt-get install mono-mcs 
+
+# mcrypt
+pecl channel-update pecl.php.net
+pecl install mcrypt-1.0.1
 
 # CREATE USERS
 printf "${green}CREATE USERS ...\n${nocol}"
