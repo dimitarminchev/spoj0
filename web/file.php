@@ -37,5 +37,5 @@ $file = $SETS_DIR."/".$row["set_code"]."/$letter/description.$ext";
 
 // view file
 header("Content-Type: $ctype");
-header("Content-Disposition: attachment; filename='$letter.$ext';" );
+header("Content-Disposition: attachment; filename=$letter.$ext;" );
 readfile( $file );
