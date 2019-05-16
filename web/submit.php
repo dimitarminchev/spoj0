@@ -66,15 +66,17 @@ if(isset($_REQUEST["id"])) $pid = (int)$_REQUEST["id"];
 $text = <<<EOT
 <h1>%s</h1>
 <form class="form-horizontal" action="submit.php" method="POST">
+<input type="hidden" name="task" id="task" value="$pid" />
 <fieldset>
 
-<!-- task -->
+<!-- task
 <div class="form-group">
   <label class="col-md-4 control-label" for="task">%s</label>
   <div class="col-md-4">
   <input id="task" name="task" type="text" placeholder="%s" class="form-control input-md" required="" value="$pid">
   </div>
 </div>
+-->
 <!-- user -->
 <div class="form-group">
   <label class="col-md-4 control-label" for="user">%s</label>
@@ -95,7 +97,7 @@ $text = <<<EOT
   <div class="col-md-4">
    <select onchange="javascript:showDiv(this)" class="form-control" name="language" id="language" class="form-control input-md">
     <option selected value="cpp">C++</option>
-    <option value="cs">C#</option>
+    <!-- <option value="cs">C#</option> -->
     <option value="java">Java</option>
    </select>
    <div id="language_note" class="alert alert-info" style="margin-top:10px; display: none;">%s</div>
