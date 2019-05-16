@@ -60,7 +60,7 @@ $url_en = $url['path']."?".http_build_query($params);
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-		<li <?php if($page=="news") echo 'class="active"'; ?>><a href="news.php"><?php echo $lang["nav"]["news"]; ?></a></li>
+		<!-- <li <?php if($page=="news") echo 'class="active"'; ?>><a href="news.php"><?php echo $lang["nav"]["news"]; ?></a></li> -->
 		<li <?php if($page=="contests") echo 'class="active"'; ?>><a href="index.php"><?php echo $lang["nav"]["contests"]; ?></a></li>
                 <!-- <li <?php if($page=="register") echo 'class="active"'; ?>><a href="register.php"><?php echo $lang["nav"]["register"]; ?></a></li> -->
 		<!-- <li <?php if($page=="submit") echo 'class="active"'; ?>><a href="submit.php"><?php echo $lang["nav"]["submit"]; ?></a></li> -->
