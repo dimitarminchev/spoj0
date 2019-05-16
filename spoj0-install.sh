@@ -17,6 +17,9 @@ if [ $answer = "no" ]; then
    exit 1 # EXIT
 fi
 
+# TIMEZONE
+timedatectl set-timezone Europe/Sofia
+
 # INSTALL PACKAGES
 printf "${green}INSTALL PACKAGES ...\n${nocol}"
 apt-get --assume-yes update
