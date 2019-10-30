@@ -2,7 +2,7 @@
 Simple Programming Contests Online Judge System.
 
 ## Installation
-- Download and Install [Ubuntu Server 18.04 LTS](http://releases.ubuntu.com/18.04/ubuntu-18.04.2-live-server-amd64.iso.torrent)
+- Download and Install [Ubuntu Server 18.04 LTS](http://releases.ubuntu.com/18.04/ubuntu-18.04.3-live-server-amd64.iso.torrent)
 - Log in and execute following lines:
 ```
 git clone https://github.com/dimitarminchev/spoj0.git
@@ -10,7 +10,7 @@ cd spoj0
 sudo ./spoj0-install.sh
 ```
 ## LAMP
-- ubuntu 18.04.02 
+- ubuntu 18.04.03 
 - apache 2.4.29
 - mysql 5.7.26
 - php 7.2.17
