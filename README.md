@@ -2,7 +2,7 @@
 Simple Programming Contests Online Judge System.
 
 ## Installation
-- Download and Install [Ubuntu Server 18.04 LTS][1]
+- Download and Install [Ubuntu Server 18.04 LTS](http://releases.ubuntu.com/18.04/ubuntu-18.04.2-live-server-amd64.iso.torrent)
 - Log in and execute following lines:
 ```
 git clone https://github.com/dimitarminchev/spoj0.git
@@ -22,8 +22,5 @@ sudo ./spoj0-install.sh
 
 ## Credits
 - Original web interface is written on PERL by Milo Sredkov, E-mail: <milo@milosredkov.com>  
-- Brand new web interface is written on PHP by Dimitar Minchev, E-mail: <dimitar.minchev@gmail.com>, Blog: [minchev.eu][2]
+- Brand new web interface is written on PHP by Dimitar Minchev, E-mail: <dimitar.minchev@gmail.com>, Blog: [minchev.eu](http://www.minchev.eu/)
 - Contestation (Questions and Answers) by Ivo Kamenarov, E-mail: <ikk@ami.uni-ruse.bg>
-
-[1]: http://releases.ubuntu.com/18.04/ubuntu-18.04.2-live-server-amd64.iso.torrent
-[2]: http://www.minchev.eu/
